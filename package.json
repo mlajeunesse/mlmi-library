@@ -1,6 +1,6 @@
 {
-  "name": "mlmi-elements",
-  "version": "0.0.1",
+  "name": "mlmi-library",
+  "version": "0.0.2",
   "description": "Librairie front-end par Mathieu Lajeunesse médias interactifs.",
   "author": "Mathieu Lajeunesse médias interactifs",
   "private": true,
