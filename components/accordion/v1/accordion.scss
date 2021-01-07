@@ -1,0 +1,27 @@
+$accordion-transition-duration: .25s !default;
+$accordion-default-max-height: 200px !default;
+
+.accordion {
+  &__header {
+    position: relative;
+    width: 100%;
+    transition: color $accordion-transition-duration ease;
+  }
+
+  &__panel {
+    display: block;
+    overflow: hidden;
+    opacity: 1;
+    transition: visibility $accordion-transition-duration ease, max-height $accordion-transition-duration ease, opacity $accordion-transition-duration ease;
+    max-height: $accordion-default-max-height;
+    visibility: visible;
+
+    &[aria-hidden=true] {
+      display: block;
+      max-height: 0 !important; // scss-lint:disable ImportantRule
+      opacity: 0;
+      visibility: hidden;
+      transition: visibility $accordion-transition-duration ease, max-height $accordion-transition-duration ease, opacity $accordion-transition-duration ease;
+    }
+  }
+}

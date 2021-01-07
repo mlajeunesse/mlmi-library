@@ -1,0 +1,114 @@
+$scrollbar-width: 10px !default;
+$scrollbar-height: 100% !default;
+$scrollbar-background: transparent !default;
+$scrollbar-thumb-height: 25% !default;
+$scrollbar-thumb-min-height: 25% !default;
+$scrollbar-thumb-max-height: 75% !default;
+$scrollbar-thumb-radius: 0 !default;
+$scrollbar-thumb-color: #000 !default;
+$scrollbar-thumb-hover-color: #000 !default;
+$scrollbar-opacity: .25 !default;
+$scrollbar-active-opacity: .75 !default;
+$scrollbar-hover-opacity: 1 !default;
+$scrollbar-transition-duration: .25s !default;
+$scrollbar-thumb-x: 0 !default;
+$scrollbar-thumb-y: 0 !default;
+
+.scroller {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 100%;
+
+  &--horizontal {
+    max-height: none;
+    max-width: 100%;
+
+    + .scroller__scrollbar {
+      top: auto;
+      right: auto;
+      bottom: 0;
+      left: 0;
+      height: $scrollbar-width;
+      width: $scrollbar-height;
+
+      .scroller__scrollbar__thumb {
+        top: auto;
+        bottom: 0;
+        height: 100%;
+        width: $scrollbar-thumb-height;
+        min-width: $scrollbar-thumb-min-height;
+        max-width: $scrollbar-thumb-max-height;
+        min-height: 0;
+
+        &::after {
+          top: $scrollbar-thumb-x;
+          right: $scrollbar-thumb-y;
+          bottom: $scrollbar-thumb-x;
+          left: $scrollbar-thumb-y;
+        }
+      }
+    }
+  }
+
+  &__container {
+    box-sizing: border-box;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+
+    * { box-sizing: inherit; }
+  }
+
+  &__scrollbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: $scrollbar-height;
+    width: $scrollbar-width;
+    background: $scrollbar-background;
+
+    &__thumb {
+      position: absolute;
+      cursor: pointer;
+      user-select: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: $scrollbar-thumb-height;
+      min-height: $scrollbar-thumb-min-height;
+      max-height: $scrollbar-thumb-max-height;
+      opacity: $scrollbar-opacity;
+      transition: opacity $scrollbar-transition-duration ease;
+
+      &::after {
+        position: absolute;
+        display: block;
+        content: '';
+        top: $scrollbar-thumb-y;
+        left: $scrollbar-thumb-x;
+        right: $scrollbar-thumb-x;
+        bottom: $scrollbar-thumb-y;
+        transition: all $scrollbar-transition-duration ease;
+        background-color: $scrollbar-thumb-color;
+        border-radius: $scrollbar-thumb-radius;
+      }
+    }
+
+    &--active .scroller__scrollbar {
+      &__thumb {
+        opacity: $scrollbar-active-opacity;
+      }
+    }
+
+    &:hover .scroller__scrollbar,
+    &--dragging .scroller__scrollbar {
+      &__thumb {
+        opacity: $scrollbar-hover-opacity;
+
+        &::after {
+          background-color: $scrollbar-thumb-hover-color;
+        }
+      }
+    }
+  }
+}

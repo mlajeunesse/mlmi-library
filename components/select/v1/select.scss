@@ -1,0 +1,198 @@
+/*
+*  Select element
+*/
+
+$select-border-width: 1px !default;
+$select-border: $input-border !default;
+$select-border-focus: $input-border-focus !default;
+$select-border-active: $input-border-active !default;
+$select-padding: $input-padding !default;
+$select-background: $input-background !default;
+$select-background-focus: $input-background-focus !default;
+$select-background-active: $input-background-active !default;
+
+$select-options-max-height: rem(160) !default;
+$select-options-border-width: 1px !default;
+$select-options-border: $select-border !default;
+$select-options-background: $select-background !default;
+$select-options-background-focus: $select-options-background !default;
+$select-options-background-active: $select-options-background !default;
+$select-options-padding: $select-padding !default;
+
+@mixin select {
+  -webkit-touch-callout: none;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  user-select: none;
+  color: inherit;
+
+  select {
+    display: none !important;
+  }
+
+  &__selected {
+    @include input-reset;
+    position: relative;
+    display: block;
+    width: 100%;
+    border: $select-border;
+    padding: $select-padding;
+    background-color: $select-background;
+
+    &::after {
+      content: '▾';
+      font-family: sans-serif;
+      display: block;
+      width: rem(12);
+      height: rem(12);
+      line-height: rem(12);
+      text-align: center;
+      position: absolute;
+      right: rem(20);
+      top: calc(50% - #{rem(6)});
+      transform: rotate(0deg);
+      pointer-events: none;
+    }
+
+    &:focus {
+      outline: 0;
+      border: $select-border-focus;
+      background-color: $select-background-focus;
+    }
+
+    &:active {
+      outline: 0;
+      border: $select-border-active;
+      background: $select-background-active;
+    }
+  }
+
+  &__options {
+    position: absolute;
+    display: none;
+    width: 100%;
+    border: $select-options-border;
+    background-color: $select-options-background;
+    z-index: 99;
+    overflow: hidden;
+
+    ul {
+      @include list-unstyled;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      max-height: $select-options-max-height;
+      width: calc(100% + 40px);
+      padding-right: 40px;
+
+      li {
+        padding: $select-options-padding;
+        cursor: pointer;
+
+        &:focus,
+        &:hover {
+          background-color: $select-options-background-focus;
+          outline: 0;
+        }
+
+        &:active {
+          background-color: $select-options-background-active;
+          outline: 0;
+        }
+
+        &.disabled {
+          opacity: .25;
+          pointer-events: none;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  &--opened:not(.select--upward) .select {
+    &__selected {
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__options {
+      display: block;
+      top: calc(100% - #{$select-options-border-width});
+    }
+  }
+
+  &--opened.select--upward .select {
+    &__selected {
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__options {
+      display: block;
+      bottom: calc(100% - #{$select-options-border-width});
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: .75;
+  }
+}
+
+@mixin select-override {
+  &__selected {
+    border: $select-border;
+    padding: $select-padding;
+    background-color: $select-background;
+
+    &:focus {
+      border: $select-border-focus;
+      background-color: $select-background-focus;
+    }
+
+    &:active {
+      border: $select-border-active;
+      background: $select-background-active;
+    }
+  }
+
+  &__options {
+    border: $select-options-border;
+    background-color: $select-options-background;
+
+    ul {
+      max-height: $select-options-max-height;
+
+      li {
+        padding: $select-options-padding;
+
+        &:focus,
+        &:hover {
+          background-color: $select-options-background-focus;
+        }
+
+        &:active {
+          background-color: $select-options-background-active;
+        }
+      }
+    }
+  }
+
+  &--opened:not(.select--upward) .select {
+    &__options {
+      top: calc(100% - #{$select-options-border-width});
+    }
+  }
+
+  &--opened.select--upward .select {
+    &__options {
+      bottom: calc(100% - #{$select-options-border-width});
+    }
+  }
+}
+
+.select {
+  @include select;
+}

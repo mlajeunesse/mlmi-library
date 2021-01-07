@@ -1,0 +1,32 @@
+.tabs {
+  position: relative;
+
+  &__item {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+  }
+
+  &__panels-list {
+    position: relative;
+    overflow: hidden;
+
+    &.transition {
+      transition: height .275s ease;
+    }
+  }
+
+  &__panel {
+    outline: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &[hidden] {
+      display: block !important;
+      height: 0;
+      overflow: hidden;
+    }
+  }
+}
