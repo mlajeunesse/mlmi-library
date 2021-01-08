@@ -1,5 +1,5 @@
-import Mobile from '../modules/mobile'
-import './scroll-events'
+import Mobile from '../../../modules/mobile/v1/mobile'
+import '../../../scroll-events/v1/scroll-events'
 
 /*
 *	Fade in elements

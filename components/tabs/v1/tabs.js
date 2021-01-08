@@ -1,5 +1,5 @@
-import { TRANSITION_END } from '../utils'
-import '../plugins/scroll-to'
+import { TRANSITION_END } from '../../../utils/animation'
+import '../../../plugins/scroll-to'
 
 $.fn.Tab = function(tabset) {
   let tab = this

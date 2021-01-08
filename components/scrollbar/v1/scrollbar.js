@@ -1,7 +1,7 @@
-import Mobile from './mobile'
+import Mobile from '../../../modules/mobile/v1/mobile'
 import 'jquery-ui/ui/widgets/draggable';
 import 'jquery-ui-touch-punch';
-import '../plugins/bem';
+import '../../../plugins/bem';
 
 /*
 * DOM Scrollbar
@@ -27,18 +27,18 @@ export default function (selector, options)
 	*/
 	obj.getBrowserScrollbarSize = function() {
 		let css = {
-			border:		'none',
 			height:		'200px',
+			width:		'200px',
 			margin:		'0',
 			padding:	'0',
-			width:		'200px'
+  		border:		'none',
 		},
 		inner = $('<div>').css($.extend({}, css)),
 		outer = $('<div>').css($.extend({
+      position:	'absolute',
 			left:		'-1000px',
+			top:		'-1000px',
 			overflow:	'scroll',
-			position:	'absolute',
-			top:		'-1000px'
 		}, css)).append(inner).appendTo('body').scrollLeft(1000).scrollTop(1000),
 		scrollSize = {
 			height:		(outer.offset().top - inner.offset().top) || 0,

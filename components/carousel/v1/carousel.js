@@ -1,5 +1,5 @@
 import Swiper, { Navigation, Pagination } from 'swiper'
-import Mobile from '../../mobile/v1/mobile'
+import Mobile from '../../../modules/mobile/v1/mobile'
 
 Swiper.use([Navigation, Pagination])
 

@@ -1,5 +1,5 @@
-import { TRANSITION_END } from '../utils'
-import '../plugins/bem'
+import { TRANSITION_END } from '../../../utils/animation'
+import '../../../plugins/bem'
 
 /*
 * Navigation
