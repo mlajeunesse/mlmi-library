@@ -1,0 +1,67 @@
+/*
+*	Classes supportées dans l'éditeur WYSIWYG
+// scss-lint:disable ImportantRule, QualifyingElement
+*/
+
+html {
+  padding: 0;
+
+  &.wp-toolbar {
+    padding: 32px 0 0;
+  }
+
+  &.mce-content-body,
+  &.wp-autoresize {
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+
+.mce-content-body,
+.wp-autoresize {
+  @import 'node_modules/bootstrap/scss/reboot';
+}
+
+td.page-title {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mce-menu-item .mce-text {
+  font-size: 16px !important;
+}
+
+@mixin editor-label($content) {
+  position: relative;
+
+  &::after {
+    font-size: 9px;
+    color: $gray-800;
+    display: block;
+    content: $content;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba($white, .85);
+    border: 1px dashed $gray-500;
+    padding: 2px;
+    line-height: 1em;
+    z-index: 444;
+  }
+}
+
+.mobile-only {
+  @include editor-label('Mobile seulement');
+}
+
+.desktop-only {
+  @include editor-label('Bureau seulement');
+}
+
+img.mobile-only,
+img.desktop-only {
+  opacity: .5;
+}
