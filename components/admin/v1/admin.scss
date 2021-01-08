@@ -1,0 +1,133 @@
+/*
+*	Styles de l'outil d'administration
+// scss-lint:disable ImportantRule, QualifyingElement, IdSelector, SelectorFormat
+*/
+
+.wp-admin {
+  td.page-title {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .badge {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .mce-menu-item {
+    > .mce-text {
+      font-size: 14px !important;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif !important;
+      text-transform: none !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+    }
+
+    &.mce-menu-item-preview.mce-active {
+      > .mce-text {
+        color: $white;
+      }
+    }
+  }
+
+  .disabled {
+    pointer-events: none;
+
+    > * {
+      opacity: .5;
+    }
+  }
+
+  .acf-field select {
+    padding: 2px 8px !important;
+  }
+
+  #wpfooter,
+  #wp-admin-bar-wp-logo,
+  #wp-admin-bar-new-content,
+  #wp-admin-bar-my-account .avatar {
+    display: none !important;
+  }
+
+  #wp-admin-bar-site-name .ab-item {
+    padding-left: 8px;
+  }
+
+  .hide-if-no-customize {
+    display: none !important;
+  }
+
+  .widefat th,
+  .widefat td {
+    padding: 10px 8px !important;
+
+    input[type='checkbox'] {
+      margin-top: 1px;
+    }
+  }
+
+  th.sortable a,
+  th.sorted a {
+    padding: 6px 0 !important;
+  }
+
+  .smaller-editor > .acf-input {
+    margin-top: ln(-2);
+  }
+
+  #translation_of_wrap,
+  #icl_document_language_dropdown,
+  #icl_translation_priority_dropdown,
+  .otgs-toggle-group,
+  #icl_cfo,
+  #icl_set_duplicate,
+  .otgs-ico-help {
+    display: none;
+  }
+
+  #icl_translations_table,
+  .icl_box_paragraph {
+    margin-bottom: 0 !important;
+  }
+
+  .acf-repeater.-table.-empty .acf-table {
+    display: none;
+  }
+
+  #dashboard-widgets .postbox-container .meta-box-sortables {
+    &::after {
+      display: none !important;
+    }
+  }
+
+  .inside > br[clear='all'] {
+    display: none;
+  }
+
+  #icl_translate_options {
+    margin-bottom: 15px;
+
+    ~ strong {
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+  }
+
+  #local-storage-notice,
+  #icl_translate_options + br,
+  #icl_translate_options + br + br,
+  #icl_translate_options ~ strong + br,
+  .otgs-ico-help + br,
+  .otgs-ico-help + br + br,
+  .toplevel_page_wpseo_dashboard .update-plugins,
+  .acfml-synchronise-repeater-checkbox {
+    display: none !important;
+  }
+
+  .icl_box_paragraph > p:first-child {
+    margin-bottom: 8px;
+  }
+}

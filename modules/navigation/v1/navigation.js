@@ -25,6 +25,7 @@ export default function (options) {
   this.options = $.extend(true, {
     init: true,
     useTransition: true,
+    minTransitionTime: 0,
     useEvents: true,
     selectors: {
       pageTransition: '.page-transition',
@@ -68,6 +69,7 @@ export default function (options) {
 
       // Remove transition
       if (obj.options.useTransition) {
+        obj.el.pageTransition.off(TRANSITION_END)
         requestAnimationFrame(function() {
           obj.el.pageTransition.addModifier('hidden').on(TRANSITION_END, function() {
             obj.el.pageTransition.off(TRANSITION_END).removeModifier('visible').removeModifier('hidden')
@@ -139,7 +141,10 @@ export default function (options) {
         requestAnimationFrame(function() {
           obj.el.pageTransition.removeModifier('hidden')
           requestAnimationFrame(function() {
-            obj.el.pageTransition.addModifier('visible').on(TRANSITION_END, function() {
+            obj.el.pageTransition.addModifier('visible').on(TRANSITION_END, function(e) {
+              if (obj.options.minTransitionTime && e.originalEvent.elapsedTime < obj.options.minTransitionTime) {
+                return
+              }
               $(this).off(TRANSITION_END)
               if (obj.options.useEvents) {
                 $(window).trigger('page_exit')
