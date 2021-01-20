@@ -17,6 +17,9 @@ $.fn.FloatingLabel = function() {
     } else {
       self.removeClass('field--populated').addClass('field--empty')
       self.is_empty = true
+      if (self.field.prop('tagName').toLowerCase() == 'select') {
+        self.blurred()
+      }
     }
   }
 
