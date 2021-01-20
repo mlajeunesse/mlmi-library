@@ -1,4 +1,5 @@
 import Mobile from '../../../modules/mobile/v1/mobile'
+// import Mobile from '../../../modules/scroll-events/v1/mobile'
 import 'jquery-ui/ui/widgets/draggable';
 import 'jquery-ui-touch-punch';
 import '../../../plugins/bem';
@@ -148,7 +149,7 @@ export default function (selector, options)
 			if (!_bar.options.hasOwnProperty('size')) _bar.options.size = 'auto';
 
 			// create elements
-			_bar.el.thumb = _bar.addBlockElement('thumb');
+			_bar.el.thumb = _bar.addElement('thumb');
 			_bar.append(_bar.el.thumb);
 			_bar.scroller.append(_bar);
 			$(_bar.el.thumb).draggable({
@@ -170,6 +171,7 @@ export default function (selector, options)
 	$.fn.MLMI_Scroller = function(options) {
 		let self = this;
 		self.options = options;
+    self.scrollEvents = undefined
 
 		self.el = {
 			scroller: undefined,
@@ -242,8 +244,9 @@ export default function (selector, options)
 		};
 
 		self.addScrollbar = function(options) {
-			self.el.scrollbar = self.el.scroller.addBlockElement('scrollbar').MLMI_Scrollbar(self, options);
-			self.el.scroller.on('scroll', self.scrolled);
+			self.el.scrollbar = self.el.scroller.addElement('scrollbar').MLMI_Scrollbar(self, options);
+      self.scrollEvents = self.el.scroller.ScrollEvents()
+      self.scrollEvents.add(self.scrolled)
 			self.sizes();
 			self.scrolled();
 			return self;
@@ -257,10 +260,7 @@ export default function (selector, options)
       }
 		};
 
-		self.scrolled = function(event) {
-			if (event != undefined) {
-				event.stopPropagation();
-			}
+		self.scrolled = function() {
 			if (!self.el.scrollbar.status.dragging) {
         let targetPercentage;
         if (self.options.direction == 'vertical') {
@@ -338,8 +338,8 @@ export default function (selector, options)
     obj.mobileChecker.addCallbacks(function() {
       if (obj.options.mobile) {
         $(selector).each(function() {
-          let scrollbar = $(this).MLMI_Scroller(obj.options).addScrollbar(obj.options);
-      		obj.scrollers.push(scrollbar);
+          let scroller = $(this).MLMI_Scroller(obj.options).addScrollbar(obj.options);
+      		obj.scrollers.push(scroller);
       	});
       } else {
         obj.kill();
@@ -347,8 +347,8 @@ export default function (selector, options)
     }, function() {
       if (obj.options.desktop) {
         $(selector).each(function() {
-          let scrollbar = $(this).MLMI_Scroller(obj.options).addScrollbar(obj.options);
-      		obj.scrollers.push(scrollbar);
+          let scroller = $(this).MLMI_Scroller(obj.options).addScrollbar(obj.options);
+      		obj.scrollers.push(scroller);
       	});
       } else {
         obj.kill();

@@ -1,5 +1,9 @@
 $scrollbar-width: 10px !default;
 $scrollbar-height: 100% !default;
+$scrollbar-top: 0px !default;
+$scrollbar-bottom: 0px !default;
+$scrollbar-right: 0px !default;
+$scrollbar-left: 0px !default;
 $scrollbar-background: transparent !default;
 $scrollbar-thumb-height: 25% !default;
 $scrollbar-thumb-min-height: 25% !default;
@@ -26,8 +30,8 @@ $scrollbar-thumb-y: 0 !default;
     + .scroller__scrollbar {
       top: auto;
       right: auto;
-      bottom: 0;
-      left: 0;
+      bottom: $scrollbar-bottom;
+      left: $scrollbar-left;
       height: $scrollbar-width;
       width: $scrollbar-height;
 
@@ -61,8 +65,8 @@ $scrollbar-thumb-y: 0 !default;
 
   &__scrollbar {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: $scrollbar-top;
+    right: $scrollbar-right;
     height: $scrollbar-height;
     width: $scrollbar-width;
     background: $scrollbar-background;
