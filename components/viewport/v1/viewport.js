@@ -1,4 +1,4 @@
-import Mobile from '../../../modules/mobile'
+import Mobile from '../../../modules/mobile/v1/mobile'
 
 /*
 * Viewport Height Fixer
