@@ -49,7 +49,8 @@ $.fn.Form = function(obj) {
     } else if (field.attr('type') == 'file') {
       return field.get(0).files[0]
     } else if (field.attr('type') == 'number') {
-      return parseInt(field.val(), 10)
+      let numericValue = parseInt(field.val(), 10)
+      return isNaN(numericValue) ? '' : numericValue
     }
     return field.val()
   }
@@ -107,7 +108,11 @@ $.fn.Form = function(obj) {
     for (let fieldName in response.errors) {
       let input = self.fields[fieldName],
       field = $(input).parents('.field').addClass('field--invalid')
-      field.after($(response.errors[fieldName]))
+      if (field.length) {
+        field.after($(response.errors[fieldName]))
+      } else {
+        self.find('.field-container--' + fieldName).append($(response.errors[fieldName]))
+      }
     }
     if (obj.options.auto_scroll) {
       let windowTarget = $('.form-error, .field--invalid').offset().top - obj.options.auto_scroll_offset

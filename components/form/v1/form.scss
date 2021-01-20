@@ -41,6 +41,13 @@ $checkbox-focus-border: $checkbox-border !default;
 $checkbox-focus-selected-background: $input-background-active !default;
 $checkbox-focus-selected-border: $checkbox-focus-border !default;
 
+$radio-width : rem(16) !default;
+$radio-margin : rem(6) !default;
+$radio-border : $input-border !default;
+$radio-dot-width : rem(8) !default;
+$radio-dot-height : rem(8) !default;
+$radio-dot-background : $input-border-color !default;
+
 @mixin input-reset() {
   appearance: none;
   background-color: transparent;
@@ -197,10 +204,11 @@ $checkbox-focus-selected-border: $checkbox-focus-border !default;
   border-radius: $field-border-radius;
   width: 100%;
   color: inherit;
+  flex-direction: column;
 
-  @if $use-floating-labels == false {
-    flex-direction: column;
-  }
+  // @if $use-floating-labels == false {
+  //   flex-direction: column;
+  // }
 
   &__input:not([type='checkbox']):not([type='radio']):not([type='file']) {
     @include form-input();
@@ -208,13 +216,25 @@ $checkbox-focus-selected-border: $checkbox-focus-border !default;
 
   &__input:not([type='checkbox']):not([type='radio']),
   .select {
-    @if $use-floating-labels == false {
-      order: 2;
-    }
+    order: 2;
+    // @if $use-floating-labels == false {
+    //   order: 2;
+    // }
   }
 
   &__label {
     @if $use-floating-labels {
+      user-select: none;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: $input-padding;
+      border: $input-border;
+      border-color: transparent;
+    }
+
+    .field--floating & {
       user-select: none;
       pointer-events: none;
       position: absolute;
@@ -280,6 +300,16 @@ $checkbox-focus-selected-border: $checkbox-focus-border !default;
       &__input {
         + span {
           border-radius: 50%;
+        }
+
+        &:checked + span {
+          &::after {
+            display: block;
+            width: $radio-dot-width;
+            height: $radio-dot-height;
+            background: $radio-dot-background;
+            border-radius: 50%;
+          }
         }
       }
     }
