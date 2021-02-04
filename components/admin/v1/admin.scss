@@ -78,6 +78,10 @@
     margin-top: ln(-2);
   }
 
+  .acf-field[data-type='tab'] + .smaller-editor > .acf-input {
+    margin-top: 0;
+  }
+
   #translation_of_wrap,
   #icl_document_language_dropdown,
   #icl_translation_priority_dropdown,
