@@ -1,0 +1,133 @@
+/*
+* Builder spacing defaults
+*/
+
+$section-margin-default-sm: rem(32) !default;
+$section-margin-default-md: rem(64) !default;
+$section-padding-default-sm: rem(48) !default;
+$section-padding-default-md: rem(64) !default;
+$row-margin-default-sm: rem(32) !default;
+$row-margin-default-md: rem(48) !default;
+$col-margin-default-sm: rem(32) !default;
+
+.page-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+
+  @include media-breakpoint-down(sm) {
+    &.pt-default,
+    &:not([class*='pt-']) {
+      padding-top: 0 !important;
+
+      &[class*='bg-'] {
+        padding-top: $section-padding-default-sm !important;
+      }
+    }
+
+    &.pb-default,
+    &:not([class*='pb-']) {
+      padding-bottom: 0 !important;
+
+      &[class*='bg-'] {
+        padding-bottom: $section-padding-default-sm !important;
+      }
+    }
+
+    &.mb-default {
+      margin-bottom: auto !important;
+
+      + .mt-default {
+        margin-top: $section-margin-default-sm !important;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    &.pt-md-default,
+    &:not([class*='pt-']) {
+      padding-top: 0 !important;
+
+      &[class*='bg-'] {
+        padding-top: $section-padding-default-md !important;
+      }
+    }
+
+    &.pb-md-default,
+    &:not([class*='pb-']) {
+      padding-bottom: 0 !important;
+
+      &[class*='bg-'] {
+        padding-bottom: $section-padding-default-md !important;
+      }
+    }
+
+    &.mb-default:not([class*='mb-md-']),
+    &.mb-md-default {
+      margin-bottom: auto !important;
+
+      + .mt-default:not([class*='mt-md-']),
+      + .mt-md-default {
+        margin-top: 0 !important;
+
+        &[class*='bg-'] {
+          margin-top: $section-margin-default-md !important;
+        }
+      }
+    }
+  }
+}
+
+
+.page-section > .row,
+.page-section > div > .row {
+  min-width: 100%;
+
+  @include media-breakpoint-down(sm) {
+    &.pt-default {
+      padding-top: 0 !important;
+    }
+
+    &.pb-default {
+      padding-bottom: 0 !important;
+    }
+
+    &.mb-default {
+      margin-bottom: auto !important;
+
+      + .row.mt-default {
+        margin-top: $row-margin-default-sm !important;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    &.pt-md-default {
+      padding-top: 0 !important;
+    }
+
+    &.pb-md-default {
+      padding-bottom: 0 !important;
+    }
+
+    &.mb-default:not([class*='mb-md-']),
+    &.mb-md-default {
+      margin-bottom: auto !important;
+
+      + .row.mt-default:not([class*='mt-md-']),
+      + .row.mt-md-default {
+        margin-top: $row-margin-default-md !important;
+      }
+    }
+  }
+}
+
+.page-section .row .col {
+  @include media-breakpoint-down(sm) {
+    + .col {
+      margin-top: $col-margin-default-sm;
+    }
+  }
+}
