@@ -224,25 +224,11 @@ $radio-dot-background : $input-border-color !default;
 
   &__label {
     @if $use-floating-labels {
-      user-select: none;
-      pointer-events: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: $input-padding;
-      border: $input-border;
-      border-color: transparent;
+      @include floating-label;
     }
 
     .field--floating & {
-      user-select: none;
-      pointer-events: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: $input-padding;
-      border: $input-border;
-      border-color: transparent;
+      @include floating-label;
     }
 
     @if $use-floating-labels == false {
