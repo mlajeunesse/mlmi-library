@@ -82,7 +82,8 @@ $col-margin-default-sm: rem(32) !default;
 
 
 .page-section > .row,
-.page-section > div > .row {
+.page-section > div[class*="container"],
+.page-section > div[class*="container"] > .row {
   min-width: 100%;
 
   @include media-breakpoint-down(sm) {
@@ -97,6 +98,7 @@ $col-margin-default-sm: rem(32) !default;
     &.mb-default {
       margin-bottom: auto !important;
 
+      + div[class*="container"],
       + .row.mt-default {
         margin-top: $row-margin-default-sm !important;
       }
@@ -116,6 +118,7 @@ $col-margin-default-sm: rem(32) !default;
     &.mb-md-default {
       margin-bottom: auto !important;
 
+      + div[class*="container"],
       + .row.mt-default:not([class*='mt-md-']),
       + .row.mt-md-default {
         margin-top: $row-margin-default-md !important;
