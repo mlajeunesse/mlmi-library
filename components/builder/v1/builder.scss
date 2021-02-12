@@ -9,6 +9,10 @@ $section-padding-default-md: rem(64) !default;
 $row-margin-default-sm: rem(32) !default;
 $row-margin-default-md: rem(48) !default;
 $col-margin-default-sm: rem(32) !default;
+$first-section-margin-default-sm: rem(32) !default;
+$first-section-margin-default-md: rem(64) !default;
+$last-section-margin-default-sm: rem(32) !default;
+$last-section-margin-default-md: rem(64) !default;
 
 .page-section {
   width: 100%;
@@ -16,121 +20,99 @@ $col-margin-default-sm: rem(32) !default;
   flex-direction: column;
   justify-content: center;
   position: relative;
+}
 
-  @include media-breakpoint-down(sm) {
-    &.pt-default,
-    &:not([class*='pt-']) {
-      padding-top: 0 !important;
-
-      &[class*='bg-'] {
-        padding-top: $section-padding-default-sm !important;
-      }
-    }
-
-    &.pb-default,
-    &:not([class*='pb-']) {
-      padding-bottom: 0 !important;
-
-      &[class*='bg-'] {
-        padding-bottom: $section-padding-default-sm !important;
-      }
-    }
-
-    &.mb-default {
-      margin-bottom: auto !important;
-
-      + .mt-default {
-        margin-top: $section-margin-default-sm !important;
-      }
-    }
+/*
+Sections
+*/
+.page-section.mt-default {
+  /* All sections have default margin-top */
+  @include responsive('margin-top', $section-margin-default-md, $section-margin-default-sm);
+  /* Except first section has a special margin-top (under header) */
+  &:first-child {
+    @include responsive('margin-top', $first-section-margin-default-md, $first-section-margin-default-sm);
   }
-
-  @include media-breakpoint-up(md) {
-    &.pt-md-default,
-    &:not([class*='pt-']) {
-      padding-top: 0 !important;
-
-      &[class*='bg-'] {
-        padding-top: $section-padding-default-md !important;
-      }
-    }
-
-    &.pb-md-default,
-    &:not([class*='pb-']) {
-      padding-bottom: 0 !important;
-
-      &[class*='bg-'] {
-        padding-bottom: $section-padding-default-md !important;
-      }
-    }
-
-    &.mb-default:not([class*='mb-md-']),
-    &.mb-md-default {
-      margin-bottom: auto !important;
-
-      + .mt-default:not([class*='mt-md-']),
-      + .mt-md-default {
-        margin-top: 0 !important;
-
-        &[class*='bg-'] {
-          margin-top: $section-margin-default-md !important;
-        }
-      }
-    }
+  /* Make sure there is no margin-top on first section if section has bg */
+  /* Make sure there is no margin-top on section with a bg following a section with a bg */
+  &[class*='bg-'] + &[class*='bg-'],
+  &[class*='bg-']:first-child {
+    margin-top: 0;
   }
 }
 
-
-.page-section > .row,
-.page-section > div[class*="container"],
-.page-section > div[class*="container"] > .row {
-  min-width: 100%;
-
-  @include media-breakpoint-down(sm) {
-    &.pt-default {
-      padding-top: 0 !important;
-    }
-
-    &.pb-default {
-      padding-bottom: 0 !important;
-    }
-
-    &.mb-default {
-      margin-bottom: auto !important;
-
-      + div[class*="container"],
-      + .row.mt-default {
-        margin-top: $row-margin-default-sm !important;
-      }
-    }
+.page-section.mb-default {
+  /* Add special margin-bottom on last section (before footer)*/
+  &:last-child {
+    @include responsive('margin-bottom', $last-section-margin-default-md, $last-section-margin-default-sm);
   }
-
-  @include media-breakpoint-up(md) {
-    &.pt-md-default {
-      padding-top: 0 !important;
-    }
-
-    &.pb-md-default {
-      padding-bottom: 0 !important;
-    }
-
-    &.mb-default:not([class*='mb-md-']),
-    &.mb-md-default {
-      margin-bottom: auto !important;
-
-      + div[class*="container"],
-      + .row.mt-default:not([class*='mt-md-']),
-      + .row.mt-md-default {
-        margin-top: $row-margin-default-md !important;
-      }
-    }
+  /* Except if last section has bg */
+  &[class*='bg-']:last-child {
+    margin-bottom: 0;
   }
 }
 
+.page-section:not([class*='pt-']),
+.page-section.pt-default {
+  /* Add default padding-top to sections with background */
+  &[class*='bg-'] {
+    @include responsive('padding-top', $section-padding-default-md, $section-padding-default-sm);
+  }
+}
+
+.page-section:not([class*='pb-']),
+.page-section.pb-default {
+  /* Add default padding-bottom to sections with background */
+  &[class*='bg-'] {
+    @include responsive('padding-bottom', $section-padding-default-md, $section-padding-default-sm);
+  }
+}
+
+/*
+Rows
+*/
+.page-section {
+  /* All rows have default margin top */
+  div[class*="container"] > .row.mt-default,
+  > .row.mt-default {
+    @include responsive('margin-top', $row-margin-default-md, $row-margin-default-sm);
+  }
+  /* Except first row of first section */
+  div[class*="container"]:first-child > .row.mt-default:first-child,
+  > .row.mt-default:first-child {
+    margin-top: 0;
+  }
+}
+/* Also, if first row of first section is not in a container (break container) and has a bg, remove margin-top on first section */
+.page-section:first-child {
+  > .row.mt-default:first-child[class*='bg-'] {
+    @include responsive('margin-top', calc(#{$first-section-margin-default-md} * -1), calc(#{$first-section-margin-default-sm} * -1));
+  }
+}
+/* Also, if last row of last section is not in a container (break container) and has a bg, remove margin-bottom on last section */
+.page-section:last-child {
+  > .row.mb-default:last-child[class*='bg-'] {
+    @include responsive('margin-bottom', calc(#{$last-section-margin-default-md} * -1), calc(#{$last-section-margin-default-sm} * -1));
+  }
+}
+/* Add margin between columns on mobile */
 .page-section .row .col {
   @include media-breakpoint-down(sm) {
     + .col {
       margin-top: $col-margin-default-sm;
     }
+  }
+}
+
+/*
+Tabs
+*/
+.tabs {
+  /* Do not apply special margins (header/footer) to tabs */
+  .page-section.mt-default:first-child {
+    @include responsive('margin-top', $section-margin-default-md, $section-margin-default-sm);
+  }
+
+  .page-section.mb-default:last-child {
+    margin-bottom: 0;
   }
 }

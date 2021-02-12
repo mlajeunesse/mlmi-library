@@ -1,0 +1,152 @@
+/*
+*	Custom utilities
+*/
+
+@mixin zone() {
+  border: 1px dashed $red;
+}
+
+@mixin antialias() {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin grayscale($percent: 100%) {
+  filter: grayscale($percent);
+}
+
+@mixin overflow-auto {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin container($max-width: 100%) {
+  max-width: $max-width;
+  padding-left: rem($container-padding);
+  padding-right: rem($container-padding);
+  margin-right: auto;
+  margin-left: auto;
+
+  @include media-breakpoint-down(sm) {
+    padding-left: rem($container-padding-sm);
+    padding-right: rem($container-padding-sm);
+  }
+}
+
+@mixin responsive($property, $desktop-size, $mobile-size, $tablet-size : null) {
+  @include media-breakpoint-down(sm) {
+    #{$property}: $mobile-size;
+  }
+
+  @if ($tablet-size) {
+    @include media-breakpoint-between(sm, md) {
+      #{$property}: $tablet-size;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    #{$property}: $desktop-size;
+  }
+}
+
+@mixin img-radius-border() {
+
+  @include media-breakpoint-up(md) {
+    border-radius: rem(20);
+  }
+
+  @include media-breakpoint-down(sm) {
+    border-radius: rem(7);
+  }
+}
+
+@mixin label-tag() {
+  position: absolute;
+  top: rem(12);
+  right: rem(26);
+  z-index: 1;
+  color: $black;
+  background: $light-grey;
+  text-transform: uppercase;
+  border-radius: rem(4);
+  padding: rem(3) rem(12);
+}
+
+/*
+*  Resets
+*/
+
+@mixin input-reset() {
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin button-reset() {
+  display: inline-block;
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin table-reset() {
+  display: block;
+
+  thead,
+  tfoot,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+}
+
+@mixin list-reset() {
+  display: block;
+  list-style-type: none;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  padding: 0;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/*
+* Hover transition but not on touch device
+*/
+
+@mixin transition() {
+  .no-touch & {
+    @content;
+  }
+}
+
+/*
+*  Custom media queries
+*/
+
+@mixin retina() {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}
