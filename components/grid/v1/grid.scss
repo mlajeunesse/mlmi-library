@@ -22,3 +22,23 @@
     grid-template-columns: repeat(1, 1fr) !important;
   }
 }
+
+@mixin unset-grid {
+  grid-template-columns: unset;
+  grid-row-gap: unset;
+  grid-column-gap: unset;
+}
+
+.carousel[data-carousel-md='1'] > .grid {
+  @include media-breakpoint-up(md) {
+    @include unset-grid;
+    display: flex;
+  }
+}
+
+.carousel[data-carousel-sm='1'] > .grid {
+  @include media-breakpoint-down(sm) {
+    @include unset-grid;
+    display: flex;
+  }
+}

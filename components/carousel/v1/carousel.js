@@ -3,7 +3,7 @@ import Mobile from '../../../modules/mobile/v1/mobile'
 
 Swiper.use([Navigation, Pagination])
 
-export default function(element, swiper_options, options) {
+export default function Carousel(element, swiper_options, options) {
   let self = $(element)
   self.mobile = new Mobile()
   self.swiper = undefined
@@ -36,6 +36,7 @@ export default function(element, swiper_options, options) {
     if (self.options.onBeforeInit != undefined) {
       self.options.onBeforeInit(self)
     }
+    self.addClass('swiper-container')
     self.wrapper.addClass('swiper-wrapper')
     self.slides.addClass('swiper-slide')
     if (self.options.groupItems && self.getSlidesPerGroup()) {
@@ -57,6 +58,7 @@ export default function(element, swiper_options, options) {
   }
 
   self.kill = function() {
+    self.removeClass('swiper-container')
     if (self.wrapper.length) {
       self.wrapper.removeClass('swiper-wrapper')
     }
@@ -115,5 +117,48 @@ export default function(element, swiper_options, options) {
   self.init = function() {
     self.mobile.addCallbacks(self.toggle_mobile, self.toggle_desktop)
   }
+
   return self
+}
+
+export function Carousel_CoreInit() {
+  $('.carousel').each(function() {
+    let self = $(this)
+    let coreOptions = self.data('carousel')
+    let swiperOptions = {
+      direction: 'horizontal',
+      loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
+      simulateTouch: $.inArray('simulate_touch', coreOptions) !== -1 ? true : false,
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: self.data('columns'),
+        }
+      }
+    }
+    if ($.inArray('use_bullets', coreOptions) !== -1) {
+      swiperOptions.pagination = {
+        el: self.find('.carousel__toolbar .swiper-pagination').get(0),
+        type: 'bullets',
+        clickable: true,
+      }
+    }
+    if ($.inArray('use_arrows', coreOptions) !== -1) {
+      swiperOptions.navigation = {
+        prevEl: self.find('.carousel__toolbar .swiper-button-prev').get(0),
+        nextEl: self.find('.carousel__toolbar .swiper-button-next').get(0),
+      }
+    }
+    let carouselOptions = {
+      mobile: self.data('carousel-sm') ? true : false,
+      desktop: self.data('carousel-md') ? true : false,
+      wrapperClass: 'carousel__wrapper',
+      slideClass: 'carousel__slide',
+    }
+    let carousel = new Carousel(self.get(0), swiperOptions, carouselOptions)
+    console.log(coreOptions, swiperOptions, carouselOptions)
+    carousel.init()
+  })
 }
