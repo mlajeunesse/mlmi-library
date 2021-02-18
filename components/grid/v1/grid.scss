@@ -1,11 +1,12 @@
-$grid-component-row-gap: $grid-gutter-size !default;
-$grid-component-column-gap: $grid-component-row-gap !default;
+$grid-component-column-gap: rem($grid-gutter-size) !default;
+$grid-component-row-gap-md: $grid-component-column-gap !default;
+$grid-component-row-gap-sm: $grid-component-row-gap-md !default;
 
 .grid {
+  @include responsive('grid-row-gap', $grid-component-row-gap-md, $grid-component-row-gap-sm);
   display: grid;
   grid-template-columns: 1fr;
-  grid-row-gap: rem($grid-component-row-gap);
-  grid-column-gap: rem($grid-component-column-gap);
+  grid-column-gap: $grid-component-column-gap;
 
   @for $i from 1 through 6 {
     &--col-#{$i}{
