@@ -1,8 +1,11 @@
+$grid-component-row-gap: $grid-gutter-size !default;
+$grid-component-column-gap: $grid-component-row-gap !default;
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  grid-row-gap: rem($grid-gutter-size);
-  grid-column-gap: rem($grid-gutter-size);
+  grid-row-gap: rem($grid-component-row-gap);
+  grid-column-gap: rem($grid-component-column-gap);
 
   @for $i from 1 through 6 {
     &--col-#{$i}{
