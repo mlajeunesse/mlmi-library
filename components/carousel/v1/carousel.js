@@ -1,7 +1,7 @@
-import Swiper, { Navigation, Pagination } from 'swiper'
+import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper'
 import Mobile from '../../../modules/mobile/v1/mobile'
 
-Swiper.use([Navigation, Pagination])
+Swiper.use([Navigation, Pagination, Scrollbar])
 
 export default function Carousel(element, swiper_options, options) {
   let self = $(element)
@@ -121,6 +121,13 @@ export default function Carousel(element, swiper_options, options) {
   return self
 }
 
+function getCarouselGutterWidth() {
+  let gutterSizer = $('<div>').addClass('carousel-gutter-sizer').appendTo(document.body),
+  gutterSize = gutterSizer.outerWidth(false)
+  gutterSizer.remove()
+  return gutterSize
+}
+
 export function Carousel_CoreInit() {
   $('.carousel').each(function() {
     let self = $(this)
@@ -129,6 +136,7 @@ export function Carousel_CoreInit() {
       direction: 'horizontal',
       loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
       simulateTouch: $.inArray('simulate_touch', coreOptions) !== -1 ? true : false,
+      spaceBetween: getCarouselGutterWidth(),
       breakpoints: {
         0: {
           slidesPerView: 1,
@@ -149,6 +157,13 @@ export function Carousel_CoreInit() {
       swiperOptions.navigation = {
         prevEl: self.find('.carousel__toolbar .swiper-button-prev').get(0),
         nextEl: self.find('.carousel__toolbar .swiper-button-next').get(0),
+      }
+    }
+    if ($.inArray('use_scrollbar', coreOptions) !== -1) {
+      swiperOptions.loop = false
+      swiperOptions.scrollbar = {
+        el: self.find('.carousel__toolbar .swiper-scrollbar').get(0),
+        draggable: true,
       }
     }
     let carouselOptions = {
