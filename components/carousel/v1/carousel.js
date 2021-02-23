@@ -173,7 +173,6 @@ export function Carousel_CoreInit() {
       slideClass: 'carousel__slide',
     }
     let carousel = new Carousel(self.get(0), swiperOptions, carouselOptions)
-    console.log(coreOptions, swiperOptions, carouselOptions)
     carousel.init()
   })
 }
