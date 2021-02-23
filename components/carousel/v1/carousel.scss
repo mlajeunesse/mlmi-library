@@ -11,6 +11,11 @@ $carousel-bullet-border-active: $carousel-bullet-border !default;
 $carousel-nav-button-width: rem(44) !default;
 $carousel-nav-button-height: $carousel-nav-button-width !default;
 $carousel-nav-button-margin: $grid-gutter-width !default;
+$carousel-scrollbar-background: transparent !default;
+$carousel-scrollbar-height: rem(16) !default;
+$carousel-scrollbar-padding: rem(6) !default;
+$carousel-scrollbar-thumb-radius: 0 !default;
+$carousel-scrollbar-thumb-background: $black !default;
 
 .carousel-gutter-sizer {
   position: absolute;
@@ -81,4 +86,28 @@ $carousel-nav-button-margin: $grid-gutter-width !default;
 
 .swiper-button-next {
   margin-left: $carousel-nav-button-margin;
+}
+
+.swiper-scrollbar {
+  width: 100%;
+  background: $carousel-scrollbar-background;
+  height: $carousel-scrollbar-height;
+
+  &-drag {
+    cursor: pointer;
+    position: relative;
+    height: 100%;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: $carousel-scrollbar-padding;
+      left: 0;
+      width: 100%;
+      height: calc(100% - #{$carousel-scrollbar-padding * 2});
+      background-color: $carousel-scrollbar-thumb-background;
+      border-radius: $carousel-scrollbar-thumb-radius;
+    }
+  }
 }
