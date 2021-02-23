@@ -90,13 +90,26 @@ $carousel-scrollbar-thumb-background: $black !default;
 
 .swiper-scrollbar {
   width: 100%;
-  background: $carousel-scrollbar-background;
   height: $carousel-scrollbar-height;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: $carousel-scrollbar-padding;
+    left: 0;
+    width: 100%;
+    height: calc(100% - #{$carousel-scrollbar-padding * 2});
+    background-color: $carousel-scrollbar-background;
+    border-radius: $carousel-scrollbar-thumb-radius;
+  }
 
   &-drag {
     cursor: pointer;
     position: relative;
     height: 100%;
+    z-index: 1;
 
     &::after {
       content: '';
