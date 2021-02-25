@@ -50,13 +50,13 @@
 }
 
 @mixin responsive-text($desktop-size : $font-size-lg, $mobile-size : $font-size-sm) {
-  font-size: $desktop-size;
+  font-size: rem($desktop-size);
 
   body & {
-    font-size: $mobile-size;
+    font-size: rem($mobile-size);
 
     @include media-breakpoint-up(md) {
-      font-size: $desktop-size;
+      font-size: rem($desktop-size);
     }
   }
 }
