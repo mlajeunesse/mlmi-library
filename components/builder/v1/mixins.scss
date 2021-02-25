@@ -49,6 +49,18 @@
   }
 }
 
+@mixin responsive-text($desktop-size : $font-size-lg, $mobile-size : $font-size-sm) {
+  font-size: $desktop-size;
+
+  body & {
+    font-size: $mobile-size;
+
+    @include media-breakpoint-up(md) {
+      font-size: $desktop-size;
+    }
+  }
+}
+
 @mixin img-radius-border() {
 
   @include media-breakpoint-up(md) {
