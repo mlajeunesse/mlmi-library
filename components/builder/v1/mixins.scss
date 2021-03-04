@@ -61,29 +61,6 @@
   }
 }
 
-@mixin img-radius-border() {
-
-  @include media-breakpoint-up(md) {
-    border-radius: rem(20);
-  }
-
-  @include media-breakpoint-down(sm) {
-    border-radius: rem(7);
-  }
-}
-
-@mixin label-tag() {
-  position: absolute;
-  top: rem(12);
-  right: rem(26);
-  z-index: 1;
-  color: $black;
-  background: $light-grey;
-  text-transform: uppercase;
-  border-radius: rem(4);
-  padding: rem(3) rem(12);
-}
-
 /*
 *  Resets
 */
