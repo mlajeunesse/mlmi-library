@@ -121,8 +121,8 @@ export default function Carousel(element, swiper_options, options) {
   return self
 }
 
-function getCarouselGutterWidth() {
-  let gutterSizer = $('<div>').addClass('carousel-gutter-sizer').appendTo(document.body),
+function getCarouselGutterWidth(carousel) {
+  let gutterSizer = $('<div>').addClass('carousel-gutter-sizer').appendTo(carousel),
   gutterSize = gutterSizer.outerWidth(false)
   gutterSizer.remove()
   return gutterSize
@@ -136,7 +136,7 @@ export function Carousel_CoreInit() {
       direction: 'horizontal',
       loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
       simulateTouch: $.inArray('simulate_touch', coreOptions) !== -1 ? true : false,
-      spaceBetween: getCarouselGutterWidth(),
+      spaceBetween: getCarouselGutterWidth(self),
       breakpoints: {
         0: {
           slidesPerView: 1,
