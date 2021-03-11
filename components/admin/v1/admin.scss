@@ -340,4 +340,96 @@
       }
     }
   }
+
+  /* Taxonomies */
+  form#addtag {
+    margin-top: 22px;
+
+    .form-field {
+      margin: 8px 0 0 !important;
+
+      > p {
+        display: none;
+      }
+    }
+
+    .mlmi-builder-section,
+    #dashboard-widgets {
+      display: none;
+    }
+  }
+
+  form[name='edittag'] {
+    margin-top: 20px;
+
+    .form-field {
+      th,
+      td {
+        padding-top: 0;
+
+        p.description {
+          display: none;
+        }
+      }
+    }
+
+    .wpml-term-languages-wrap {
+      .postbox-container {
+        width: 480px !important;
+      }
+
+      .postbox[id^='icl_tax'] {
+        h3.hndle {
+          padding: 8px 12px !important;
+          font-weight: bold !important;
+          margin: 0 !important;
+        }
+
+        .inside {
+          padding-top: 0 !important;
+          margin-top: 0 !important;
+        }
+
+        #icl_translate_options {
+          margin-top: 12px;
+          margin-bottom: 0;
+
+          > p {
+            margin-bottom: 0 !important;
+
+            > b {
+              color: #1d2327;
+            }
+          }
+
+          table#icl_translations_table {
+            + br {
+              display: none;
+            }
+
+            > tbody {
+              > tr > td {
+                padding-left: 0;
+                padding-right: 0;
+                width: auto !important;
+              }
+
+              > tr:first-child > td {
+                padding-top: 6px;
+              }
+
+              > tr:last-child > td {
+                padding-bottom: 3px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .form-table {
+      width: calc(100vw - 250px);
+      max-width: none;
+    }
+  }
 }

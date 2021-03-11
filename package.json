@@ -1,16 +1,16 @@
 {
   "name": "mlmi-library",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Librairie front-end par Mathieu Lajeunesse médias interactifs.",
   "author": "Mathieu Lajeunesse médias interactifs",
   "private": true,
   "main": "index.js",
   "dependencies": {
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.0",
     "jquery-accessible-accordion-aria": "^2.6.1",
     "jquery-datepicker": "^1.12.3",
     "jquery-ui": "^1.12",
     "jquery-ui-touch-punch": "^0.2",
-    "swiper": "^6.4.15"
+    "swiper": "^6.5.0"
   }
 }
