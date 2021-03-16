@@ -134,6 +134,7 @@ export function Carousel_CoreInit() {
     let coreOptions = self.data('carousel')
     let swiperOptions = {
       direction: 'horizontal',
+      autoHeight: false,
       loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
       simulateTouch: $.inArray('simulate_touch', coreOptions) !== -1 ? true : false,
       spaceBetween: getCarouselGutterWidth(self),
@@ -165,6 +166,9 @@ export function Carousel_CoreInit() {
         el: self.find('.carousel__toolbar .swiper-scrollbar').get(0),
         draggable: true,
       }
+    }
+    if ($.inArray('auto_height', coreOptions) !== -1) {
+      swiperOptions.autoHeight = true
     }
     let carouselOptions = {
       mobile: self.data('carousel-sm') ? true : false,
