@@ -10,7 +10,7 @@ $burger-stroke-width: 2px !default;
 $burger-padding-x: 9px !default;
 $burger-spacing-y: 9px !default;
 $burger-padding-y: 13px !default;
-$burger-button-height: $burger-padding-y * 2 + $burger-spacing-y * 2 + $burger-stroke-width * 3;
+$burger-button-height: $burger-padding-y * 2 + $burger-spacing-y * 2 + $burger-stroke-width * 3 !default;
 $burger-top-rotation: -135deg !default;
 $burger-bottom-rotation: -225deg !default;
 
