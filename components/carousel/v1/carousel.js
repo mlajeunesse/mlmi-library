@@ -80,6 +80,7 @@ export default function Carousel(element, swiper_options, options) {
   }
 
   self.toggle_mobile = function() {
+    self.wrapper.css('height', '')
     if (self.swiper != undefined && self.options.forceRebuild) {
       self.kill()
     }
@@ -91,6 +92,7 @@ export default function Carousel(element, swiper_options, options) {
   }
 
   self.toggle_desktop = function() {
+    self.wrapper.css('height', '')
     if (self.swiper != undefined && self.options.forceRebuild) {
       self.kill()
     }
@@ -131,10 +133,10 @@ function getCarouselGutterWidth(carousel) {
 export function Carousel_CoreInit() {
   $('.carousel').each(function() {
     let self = $(this)
-    let coreOptions = self.data('carousel')
-    let swiperOptions = {
+    let coreOptions = self.data('carousel'),
+    heightOptions = self.data('height'),
+    swiperOptions = {
       direction: 'horizontal',
-      autoHeight: false,
       loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
       simulateTouch: $.inArray('simulate_touch', coreOptions) !== -1 ? true : false,
       spaceBetween: getCarouselGutterWidth(self),
@@ -167,8 +169,14 @@ export function Carousel_CoreInit() {
         draggable: true,
       }
     }
-    if ($.inArray('auto_height', coreOptions) !== -1) {
+    if (heightOptions == 'auto-height') {
       swiperOptions.autoHeight = true
+    } else if (heightOptions == 'auto-height-sm') {
+      swiperOptions.breakpoints[0].autoHeight = true
+      swiperOptions.breakpoints[768].autoHeight = false
+    } else if (heightOptions == 'auto-height-md') {
+      swiperOptions.breakpoints[0].autoHeight = false
+      swiperOptions.breakpoints[768].autoHeight = true
     }
     let carouselOptions = {
       mobile: self.data('carousel-sm') ? true : false,
