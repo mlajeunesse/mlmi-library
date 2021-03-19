@@ -11,6 +11,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@mixin uppercase() {
+  text-transform: uppercase;
+}
+
 @mixin grayscale($percent: 100%) {
   filter: grayscale($percent);
 }
