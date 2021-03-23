@@ -9,13 +9,13 @@ $grid-component-row-gap-sm: $grid-component-row-gap-md !default;
   grid-column-gap: $grid-component-column-gap;
 
   @for $i from 1 through 6 {
-    &--col-#{$i}{
+    &--col-#{$i} {
       grid-template-columns: repeat($i, 1fr);
     }
   }
 
   @for $i from 2 through 6 {
-    &--col-#{$i}{
+    &--col-#{$i} {
       @include media-breakpoint-down(sm) {
         grid-template-columns: repeat(2, 1fr) !important;
       }

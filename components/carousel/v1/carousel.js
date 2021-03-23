@@ -117,7 +117,9 @@ export default function Carousel(element, swiper_options, options) {
   }
 
   self.init = function() {
-    self.mobile.addCallbacks(self.toggle_mobile, self.toggle_desktop)
+    if (self.slides.length > 1) {
+      self.mobile.addCallbacks(self.toggle_mobile, self.toggle_desktop)
+    }
   }
 
   return self
