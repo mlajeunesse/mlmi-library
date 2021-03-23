@@ -3,6 +3,9 @@ $datepicker-background: $input-background !default;
 $datepicker-padding: $input-padding !default;
 $datepicker-background-active: $datepicker-background !default;
 $datepicker-background-focus: $datepicker-background !default;
+$datepicker-arrow-width: rem(32) !default;
+$datepicker-arrow-height: $datepicker-arrow-width !default;
+$datepicker-calendar-margin-top: 0 !default;
 
 .ui-datepicker {
   border: $datepicker-border;
@@ -24,11 +27,15 @@ $datepicker-background-focus: $datepicker-background !default;
     top: 0;
     left: 0;
     display: block;
-    width: rem(32);
-    height: rem(32);
-    line-height: rem(32);
+    width: $datepicker-arrow-width;
+    height: $datepicker-arrow-height;
+    line-height: $datepicker-arrow-height;
     text-align: center;
     font-family: sans-serif;
+
+    &:hover {
+      text-decoration: none;
+    }
 
     &.ui-state-disabled {
       opacity: .25;
@@ -42,11 +49,15 @@ $datepicker-background-focus: $datepicker-background !default;
     top: 0;
     right: 0;
     display: block;
-    width: rem(32);
-    height: rem(32);
-    line-height: rem(32);
+    width: $datepicker-arrow-width;
+    height: $datepicker-arrow-height;
+    line-height: $datepicker-arrow-height;
     text-align: center;
     font-family: sans-serif;
+
+    &:hover {
+      text-decoration: none;
+    }
 
     &.ui-state-disabled {
       opacity: .25;
@@ -60,6 +71,7 @@ $datepicker-background-focus: $datepicker-background !default;
 
   &-calendar {
     width: 100%;
+    margin-top: $datepicker-calendar-margin-top;
 
     thead {
       th {
