@@ -1,8 +1,8 @@
 import Mobile from '../../../modules/mobile/v1/mobile'
-// import Mobile from '../../../modules/scroll-events/v1/mobile'
+import '../../../modules/scroll-events/v1/scroll-events';
+import '../../../plugins/bem';
 import 'jquery-ui/ui/widgets/draggable';
 import 'jquery-ui-touch-punch';
-import '../../../plugins/bem';
 
 /*
 * DOM Scrollbar

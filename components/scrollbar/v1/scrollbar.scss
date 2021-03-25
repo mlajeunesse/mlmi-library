@@ -10,7 +10,7 @@ $scrollbar-thumb-min-height: 25% !default;
 $scrollbar-thumb-max-height: 75% !default;
 $scrollbar-thumb-radius: 0 !default;
 $scrollbar-thumb-color: #000 !default;
-$scrollbar-thumb-hover-color: #000 !default;
+$scrollbar-thumb-hover-color: $scrollbar-thumb-color !default;
 $scrollbar-opacity: .25 !default;
 $scrollbar-active-opacity: .75 !default;
 $scrollbar-hover-opacity: 1 !default;
@@ -43,6 +43,7 @@ $scrollbar-thumb-y: 0 !default;
         min-width: $scrollbar-thumb-min-height;
         max-width: $scrollbar-thumb-max-height;
         min-height: 0;
+        max-height: none;
 
         &::after {
           top: $scrollbar-thumb-x;
