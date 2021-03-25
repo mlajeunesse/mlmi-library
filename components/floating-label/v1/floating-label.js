@@ -32,11 +32,13 @@ $.fn.FloatingLabel = function() {
   }
 
   return function() {
-    self.field.on('change keypress keydown keyup', self.check)
-    self.field.on('focus', self.focused)
-    self.field.on('blur', self.blurred)
-    $(window).on('load', self.check)
-    self.check()
+    if (self.field.length) {
+      self.field.on('change keypress keydown keyup', self.check)
+      self.field.on('focus', self.focused)
+      self.field.on('blur', self.blurred)
+      $(window).on('load', self.check)
+      self.check()
+    }
     self.data('floatingLabel', self)
     return self
   }()
