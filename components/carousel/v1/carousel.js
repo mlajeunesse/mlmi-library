@@ -142,6 +142,8 @@ export function Carousel_CoreInit() {
       loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
       simulateTouch: $.inArray('simulate_touch', coreOptions) !== -1 ? true : false,
       spaceBetween: getCarouselGutterWidth(self),
+      slideToClickedSlide: $.inArray('slideToClickedSlide', coreOptions) !== -1 ? true : false,
+      updateOnWindowResize: $.inArray('updateOnWindowResize', coreOptions) !== -1 ? true : false,
       breakpoints: {
         0: {
           slidesPerView: 1,
