@@ -5,6 +5,7 @@ Swiper.use([Navigation, Pagination, Scrollbar])
 
 export default function Carousel(element, swiper_options, options) {
   let self = $(element)
+  self.data('carousel', self)
   self.mobile = new Mobile()
   self.swiper = undefined
   self.options = $.extend(true, {
