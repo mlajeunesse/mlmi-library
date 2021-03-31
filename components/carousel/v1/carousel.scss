@@ -80,6 +80,7 @@ $carousel-scrollbar-thumb-background: $black !default;
   display: block;
   width: $carousel-nav-button-width;
   height: $carousel-nav-button-height;
+  line-height: $carousel-nav-button-height;
 }
 
 .swiper-button-prev {
