@@ -109,7 +109,8 @@ Tabs
 .tabs {
   /* Do not apply special margins (header/footer) to tabs */
   .page-section.mt-default:first-child {
-    @include responsive('margin-top', $section-margin-default-md, $section-margin-default-sm);
+    margin-top: 0;
+    @include responsive('padding-top', $section-margin-default-md, $section-margin-default-sm);
   }
 
   .page-section.mb-default:last-child {
