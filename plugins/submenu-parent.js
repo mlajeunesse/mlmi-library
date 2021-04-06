@@ -1,7 +1,14 @@
-$.fn.SubMenuParent = function() {
+import Mobile from '../modules/mobile/v1/mobile'
+
+$.fn.SubMenuParent = function(options) {
   let self = this
   self.mouseHasEntered = false
   self.preventClick = false
+  self.mobile = new Mobile()
+  self.options = $.extend(true, {
+    mobile: true,
+    desktop: true,
+  }, options)
 
   self.mouse_entered = function() {
     if (!self.mouseHasEntered) {
@@ -14,7 +21,11 @@ $.fn.SubMenuParent = function() {
   }
 
   self.touch_start = function() {
-    self.preventClick = !self.mouseHasEntered
+    let preventNextClick = !self.mouseHasEntered
+    if ((!self.options.mobile && self.mobile.isMobile) || (!self.options.desktop && !self.mobile.isMobile)) {
+      preventNextClick = false
+    }
+    self.preventClick = preventNextClick
   }
 
   self.clicked = function(e) {
