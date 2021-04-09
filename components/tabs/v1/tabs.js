@@ -1,8 +1,11 @@
-import { TRANSITION_END } from '../../../utils/animation'
+import { TRANSITION_END, IS_IOS, IS_ANDROID } from '../../../utils/animation'
 import '../../../plugins/scroll-to'
 
 $.fn.Tab = function(tabset) {
   let tab = this
+  if (tab.data('tab')) {
+    return tab.data('tab')
+  }
   tab.name = tab.attr('id').replace('tab-', '')
   tab.panel = tabset.find('.tabs__panel#panel-' + tab.name)
 
@@ -13,6 +16,7 @@ $.fn.Tab = function(tabset) {
   return function() {
     tab.on('click', tab.clicked)
     tab.panel.on('focus', tab.clicked)
+    tab.data('tab', tab)
     return tab
   }()
 }
@@ -102,7 +106,11 @@ $.fn.TabSet = function() {
     }
 
     /* Stop animations on resize */
-    $(window).on('resize orientationchange', tabset.stopAnimations)
+    if (IS_ANDROID || IS_IOS) {
+      $(window).on('orientationchange', tabset.stopAnimations)
+    } else {
+      $(window).on('resize orientationchange', tabset.stopAnimations)
+    }
     return tabset
   }()
 }
