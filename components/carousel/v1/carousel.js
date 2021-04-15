@@ -1,7 +1,7 @@
-import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper'
+import Swiper, { Navigation, Pagination, Scrollbar, Mousewheel } from 'swiper'
 import Mobile from '../../../modules/mobile/v1/mobile'
 
-Swiper.use([Navigation, Pagination, Scrollbar])
+Swiper.use([Navigation, Pagination, Scrollbar, Mousewheel])
 
 export default function Carousel(element, swiper_options, options) {
   let self = $(element)
@@ -143,6 +143,7 @@ export function Carousel_CoreInit() {
       loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
       simulateTouch: $.inArray('simulate_touch', coreOptions) !== -1 ? true : false,
       spaceBetween: getCarouselGutterWidth(self),
+      mousewheel: $.inArray('mousewheel', coreOptions) !== -1 ? true : false,
       slideToClickedSlide: $.inArray('slideToClickedSlide', coreOptions) !== -1 ? true : false,
       updateOnWindowResize: $.inArray('updateOnWindowResize', coreOptions) !== -1 ? true : false,
       breakpoints: {
