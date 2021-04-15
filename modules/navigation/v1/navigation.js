@@ -25,12 +25,14 @@ export default function (options) {
   this.options = $.extend(true, {
     init: true,
     useTransition: true,
-    minTransitionTime: 0,
     useEvents: true,
+    useHistory: true,
+    minTransitionTime: 0,
     selectors: {
       pageTransition: '.page-transition',
       pageContent: '.app',
       pageTarget: '.app',
+      links: 'a[target!="_blank"]',
     },
     on: {
       beforeRegisterLinks: undefined,
@@ -56,15 +58,17 @@ export default function (options) {
   this.pageDisplay = function(targetURL, loadedContent) {
     // Display loaded page
     let response = $('<html>').html(loadedContent)
-    obj.el.pageTarget.replaceWith($(obj.options.selectors.pageContent, response))
-    obj.el.pageTarget = $(obj.options.selectors.pageTarget)
+    if (obj.el.pageTarget != undefined) {
+      obj.el.pageTarget.replaceWith($(obj.options.selectors.pageContent, response))
+      obj.el.pageTarget = $(obj.options.selectors.pageTarget)
+    }
     requestAnimationFrame(function() {
       if (targetURL == obj.currentURL) {
-        obj.isLoading = false
-        obj.registerLinks()
         if (obj.options.useEvents) {
           $(window).trigger('page_load', [loadedContent])
         }
+        obj.isLoading = false
+        obj.registerLinks()
       }
 
       // Remove transition
@@ -88,7 +92,9 @@ export default function (options) {
       if (obj.options.filter.popState != undefined) {
         popState = obj.options.filter.popState(popState)
       }
-      window.history.pushState(popState, $('title', response).text(), obj.currentURL)
+      if (obj.options.useHistory) {
+        window.history.pushState(popState, $('title', response).text(), obj.currentURL)
+      }
     }
 
     // Analytics called if available
@@ -197,7 +203,7 @@ export default function (options) {
     if (obj.options.on.beforeRegisterLinks != undefined) {
       obj.options.on.beforeRegisterLinks()
     }
-    $('a[target!="_blank"]').each(function() {
+    $(obj.options.selectors.links).each(function() {
       if (!$(this).data('registeredTransitionLink')) {
         $(this).data('registeredTransitionLink', 1)
         if ($(this).attr('href') && $(this).attr('href').substr(0, 4) == 'http' && $(this).attr('href').indexOf(window.location.hostname) === -1) {
@@ -236,32 +242,34 @@ export default function (options) {
   */
   this.init = function() {
     /* Pop state (back) */
-    $(window).on('popstate', function(e) {
-      let popState = e.originalEvent.state
-      if (popState != null) {
-        if (obj.options.on.popState != undefined) {
-          obj.options.on.popState(e.target.location.href, popState)
+    if (obj.options.useHistory) {
+      $(window).on('popstate', function(e) {
+        let popState = e.originalEvent.state
+        if (popState != null) {
+          if (obj.options.on.popState != undefined) {
+            obj.options.on.popState(e.target.location.href, popState)
+          }
+          if (popState.isPageTransition != null && popState.isPageTransition == true) {
+            obj.isPopping = true
+            obj.getPage(e.target.location.href)
+          } else {
+            location.href = e.target.location.href
+            return true
+          }
         }
-        if (popState.isPageTransition != null && popState.isPageTransition == true) {
-          obj.isPopping = true
-          obj.getPage(e.target.location.href)
-        } else {
-          location.href = e.target.location.href
-          return true
-        }
-      }
-    })
+      })
 
-    /* Replace initial state (load) */
-    if (!obj.el.pageTarget.data('no-transition')) {
-      let popState = {
-        isPageTransition: true,
-        previousPageURL: window.location.href,
+      /* Replace initial state (load) */
+      if (!obj.el.pageTarget.data('no-transition')) {
+        let popState = {
+          isPageTransition: true,
+          previousPageURL: window.location.href,
+        }
+        if (obj.options.filter.popState != undefined) {
+          popState = obj.options.filter.popState(popState)
+        }
+        window.history.replaceState(popState, document.title, window.location.href)
       }
-      if (obj.options.filter.popState != undefined) {
-        popState = obj.options.filter.popState(popState)
-      }
-      window.history.replaceState(popState, document.title, window.location.href)
     }
 
     /* First page load */

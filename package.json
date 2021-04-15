@@ -11,6 +11,6 @@
     "jquery-datepicker": "^1.12.3",
     "jquery-ui": "^1.12",
     "jquery-ui-touch-punch": "^0.2",
-    "swiper": "^6.5.0"
+    "swiper": "^6.5.6"
   }
 }
