@@ -14,6 +14,8 @@ export default function (options) {
   this.isLoading = false
   this.isPopping = false
   this.request = undefined
+  this.step = 0;
+  this.stepIncrement = 0
 
   if (options == undefined) {
     options = {}
@@ -85,9 +87,11 @@ export default function (options) {
     // Push state
     if (!obj.isPopping) {
       document.title = $('title', response).text()
+      obj.stepIncrement = obj.step++
       let popState = {
         isPageTransition: true,
         previousPageURL: window.location.href,
+        stepIncrement: obj.stepIncrement,
       }
       if (obj.options.filter.popState != undefined) {
         popState = obj.options.filter.popState(popState)
@@ -108,6 +112,14 @@ export default function (options) {
       }
     }
     obj.isPopping = false
+  }
+
+  this.pushState = function(popState, title, url) {
+    obj.stepIncrement = obj.step++
+    popState.previousPageURL = window.location.href
+    popState.stepIncrement = obj.stepIncrement
+    obj.currentURL = url
+    window.history.pushState(popState, title, obj.currentURL)
   }
 
   /*
@@ -246,13 +258,15 @@ export default function (options) {
       $(window).on('popstate', function(e) {
         let popState = e.originalEvent.state
         if (popState != null) {
+          popState.direction = popState.stepIncrement < obj.stepIncrement ? 'backward' : 'forward';
+          obj.stepIncrement = popState.stepIncrement
           if (obj.options.on.popState != undefined) {
             obj.options.on.popState(e.target.location.href, popState)
           }
-          if (popState.isPageTransition != null && popState.isPageTransition == true) {
+          if (popState.isPageTransition != null && popState.isPageTransition === true) {
             obj.isPopping = true
             obj.getPage(e.target.location.href)
-          } else {
+          } else if (popState.isPageTransition != null && popState.isPageTransition === false) {
             location.href = e.target.location.href
             return true
           }
@@ -264,6 +278,7 @@ export default function (options) {
         let popState = {
           isPageTransition: true,
           previousPageURL: window.location.href,
+          stepIncrement: obj.step,
         }
         if (obj.options.filter.popState != undefined) {
           popState = obj.options.filter.popState(popState)
