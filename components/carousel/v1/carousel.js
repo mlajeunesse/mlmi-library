@@ -143,7 +143,7 @@ export function Carousel_CoreInit() {
       loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
       simulateTouch: $.inArray('simulate_touch', coreOptions) !== -1 ? true : false,
       spaceBetween: getCarouselGutterWidth(self),
-      mousewheel: $.inArray('mousewheel', coreOptions) !== -1 ? {releaseOnEdges: true} : false,
+      mousewheel: $.inArray('mousewheel', coreOptions) !== -1 ? {releaseOnEdges: true, forceToAxis: true,} : false,
       slideToClickedSlide: $.inArray('slideToClickedSlide', coreOptions) !== -1 ? true : false,
       updateOnWindowResize: $.inArray('updateOnWindowResize', coreOptions) !== -1 ? true : false,
       breakpoints: {
