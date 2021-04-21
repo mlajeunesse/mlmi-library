@@ -7,7 +7,6 @@ import '../../../scroll-events/v1/scroll-events'
 $.fn.FadeIn = function() {
   var self = this
   self.scrollChecker = $(window).ScrollEvents()
-  self.scrollInfosChecker = $('.infos .page-content').ScrollEvents()
   self.mobileChecker = new Mobile()
   self.delay = self.mobileChecker.isMobile ? 0 : parseFloat(self.data("delay"))
   self.type = undefined
@@ -48,7 +47,6 @@ $.fn.FadeIn = function() {
     setTimeout(function() {
       self.addClass(self.type + "--active")
       self.scrollChecker.add(self.scrolled)
-      self.scrollInfosChecker.add(self.scrolled)
       self.scrolled()
     }, 250)
     return self
