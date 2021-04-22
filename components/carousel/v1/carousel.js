@@ -146,6 +146,7 @@ export function Carousel_CoreInit() {
       mousewheel: $.inArray('mousewheel', coreOptions) !== -1 ? {releaseOnEdges: true, forceToAxis: true,} : false,
       slideToClickedSlide: $.inArray('slideToClickedSlide', coreOptions) !== -1 ? true : false,
       updateOnWindowResize: $.inArray('updateOnWindowResize', coreOptions) !== -1 ? true : false,
+      speed: self.data('speed'),
       breakpoints: {
         0: {
           slidesPerView: 1,
