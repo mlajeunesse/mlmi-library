@@ -122,6 +122,10 @@ $.fn.Form = function(obj) {
         }, 450)
       }
     }
+    if ('grecaptcha' in window) {
+      grecaptcha.reset()
+      $('input[name="recaptcha"]').val('')
+    }
     if (obj.options.onError != undefined) {
       obj.options.onError(response)
     }
