@@ -2,7 +2,7 @@ import '../../../modules/scroll-events/v1/scroll-events'
 
 $.fn.FixedContent = function(options) {
   let self = this
-  self.scrollEvents = $(window).ScrollEvents;
+  self.scrollEvents = $(window).ScrollEvents();
 
   if (self.data('fixedContent')) {
     return self.data('fixedContent')
@@ -71,7 +71,6 @@ $.fn.FixedContent = function(options) {
     $.mlmi.mobile.addCallbacks(function() {
       self.destroy()
     }, function() {
-      console.log(self.scrollEvents);
       self.scrollEvents.add(self.calculatePosition)
       self.calculatePosition()
     })
