@@ -26,16 +26,19 @@ $.fn.FixedContent = function(options) {
 
       /* Offset for top element */
       let topOffset = $(window).scrollTop()
-      if (topOffset < 0) {
-        topOffset = 0
-      } else if (topOffset > self.options.topBlocker.outerHeight(false)) {
-        topOffset = self.options.topBlocker.outerHeight(false)
-      }
+      // if (topOffset < 0) {
+      //   topOffset = 0
+      // } else if (topOffset > self.options.topBlocker.outerHeight(false)) {
+      //   topOffset = self.options.topBlocker.outerHeight(false)
+      // }
       targetTop -= topOffset
 
       /* Limit top */
       if (targetTop < self.options.limitFromTop) {
         targetTop = self.options.limitFromTop;
+        self.addClass('--fixed-at-top');
+      }else {
+        self.removeClass('--fixed-at-top');
       }
 
       /* Offset for bottom element */
@@ -69,7 +72,8 @@ $.fn.FixedContent = function(options) {
 
   return function() {
     $.mlmi.mobile.addCallbacks(function() {
-      self.destroy()
+      self.scrollEvents.add(self.calculatePosition)
+      self.calculatePosition()
     }, function() {
       self.scrollEvents.add(self.calculatePosition)
       self.calculatePosition()
