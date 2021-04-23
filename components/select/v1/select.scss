@@ -83,7 +83,9 @@ $select-options-padding: $select-padding !default;
       -webkit-overflow-scrolling: touch;
       max-height: $select-options-max-height;
       width: calc(100% + 40px);
-      padding-right: 40px;
+      margin: 0 !important;
+      padding-left: 0 40px 0 0 !important;
+      list-style-type: none !important;
 
       li {
         padding: $select-options-padding;
