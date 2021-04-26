@@ -1,9 +1,9 @@
 /*
 *	BlockElement
 */
-$.fn.BlockElement = function(_mainClass) {
+$.fn.BlockElement = function(mainClass) {
 	let self = this
-	self.mainClass = _mainClass
+	self.mainClass = mainClass
 
 	/* Add child element */
 	self.addElement = function(elementClass, element) {
@@ -15,20 +15,24 @@ $.fn.BlockElement = function(_mainClass) {
 	}
 
 	/* Add a modifier */
-	self.addModifier = function(modifier) {
-		self.addClass(self.mainClass + '--' + modifier)
+	self.addModifier = function(modifiers) {
+    modifiers.split(' ').forEach(function(modifier) {
+      self.addClass(self.mainClass + '--' + modifier)
+    })
+		return self
+	}
+
+	/* Remove a modifier */
+	self.removeModifier = function(modifiers) {
+    modifiers.split(' ').forEach(function(modifier) {
+      self.removeClass(self.mainClass + '--' + modifier)
+    })
 		return self
 	}
 
   /* Has a modifier */
   self.hasModifier = function(modifier) {
 		return self.hasClass(self.mainClass + '--' + modifier)
-	}
-
-	/* Remove a modifier */
-	self.removeModifier = function(modifier) {
-		self.removeClass(self.mainClass + '--' + modifier)
-		return self
 	}
 
 	return function() {
