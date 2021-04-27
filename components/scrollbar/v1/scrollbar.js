@@ -326,11 +326,17 @@ export default function (selector, options)
   };
 
   /* Kill scrollbars */
-  obj.kill = function() {
+  obj.kill = function(kill_mobile) {
+    if (kill_mobile == undefined) {
+      kill_mobile = false;
+    }
     obj.scrollers.forEach(function(scroller) {
       scroller.kill();
     });
     obj.scrollers = [];
+    if (kill_mobile) {
+      obj.mobileChecker.kill()
+    }
   };
 
 	/* Initialize */

@@ -58,7 +58,10 @@ export default function Carousel(element, swiper_options, options) {
     }
   }
 
-  self.kill = function() {
+  self.kill = function(kill_mobile) {
+    if (kill_mobile == undefined) {
+      kill_mobile = false
+    }
     self.removeClass('swiper-container')
     if (self.wrapper.length) {
       self.wrapper.removeClass('swiper-wrapper')
@@ -77,6 +80,9 @@ export default function Carousel(element, swiper_options, options) {
     }
     if (self.options.onKill != undefined) {
       self.options.onKill(self)
+    }
+    if (kill_mobile) {
+      self.mobile.kill()
     }
   }
 
