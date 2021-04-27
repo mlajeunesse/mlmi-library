@@ -2,6 +2,9 @@ import Mobile from '../modules/mobile/v1/mobile'
 
 $.fn.SubMenuParent = function(options) {
   let self = this
+  if (self.data('SubMenuParent')) {
+    return self.data('SubMenuParent')
+  }
   self.mouseHasEntered = false
   self.preventClick = false
   self.mobile = new Mobile()
@@ -40,6 +43,7 @@ $.fn.SubMenuParent = function(options) {
     self.on('mouseenter', self.mouse_entered)
     self.on('mouseleave', self.mouse_left)
     self.on('click', self.clicked)
+    self.data('SubMenuParent', self)
     return self
   }()
 }
