@@ -12,7 +12,7 @@ $.fn.FixedContent = function(options) {
     bottomBlocker: $('.footer'),
     container: self.parent(),
     limitFromTop: 0,
-    attached: undefined,
+    mobile: false,
   }, options)
 
   self.calculatePosition = function() {
@@ -26,19 +26,23 @@ $.fn.FixedContent = function(options) {
 
       /* Offset for top element */
       let topOffset = $(window).scrollTop()
-      // if (topOffset < 0) {
-      //   topOffset = 0
-      // } else if (topOffset > self.options.topBlocker.outerHeight(false)) {
-      //   topOffset = self.options.topBlocker.outerHeight(false)
-      // }
+      console.log('window: '+topOffset);
+      console.log('containertop: '+targetTop);
+      console.log('topblockerheight: '+self.options.topBlocker.outerHeight(false));
+      if (topOffset < 0) {
+        topOffset = 0
+      }
       targetTop -= topOffset
 
+      if(self.options.topBlocker != null){
+        var topBlockerHeight = self.options.topBlocker.outerHeight(false);
+      }else{
+        var topBlockerHeight = 0;
+      }
+
       /* Limit top */
-      if (targetTop < self.options.limitFromTop) {
-        targetTop = self.options.limitFromTop;
-        self.addClass('--fixed-at-top');
-      }else {
-        self.removeClass('--fixed-at-top');
+      if (targetTop < self.options.limitFromTop + topBlockerHeight) {
+        targetTop = self.options.limitFromTop + topBlockerHeight;
       }
 
       /* Offset for bottom element */
@@ -75,7 +79,9 @@ $.fn.FixedContent = function(options) {
       self.scrollEvents.add(self.calculatePosition)
       self.calculatePosition()
     }, function() {
-      self.scrollEvents.add(self.calculatePosition)
+      if(self.options.mobile){
+        self.scrollEvents.add(self.calculatePosition)
+      }
       self.calculatePosition()
     })
     self.data('fixedContent', self)
