@@ -87,7 +87,8 @@
   .toplevel_page_wpseo_dashboard .update-plugins,
   .acfml-synchronise-repeater-checkbox,
   .acf-repeater.-table.-empty .acf-table,
-  #dashboard-widgets .postbox-container .meta-box-sortables::after {
+  #dashboard-widgets .postbox-container .meta-box-sortables::after,
+  #wp-admin-bar-wpseo-menu {
     display: none !important;
   }
 
