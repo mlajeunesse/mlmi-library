@@ -26,7 +26,7 @@ $.fn.Form = function(obj) {
           data.append(strippedName + '[]', singleValue)
         })
       } else {
-        data.append(fieldName, self.get_form_value(fieldName))
+        data.append(fieldName, formValue)
       }
     }
     return data
@@ -47,7 +47,11 @@ $.fn.Form = function(obj) {
       })
       return values
     } else if (field.attr('type') == 'file') {
-      return field.get(0).files[0]
+      let fileInfo = field.get(0).files[0]
+      if (fileInfo == undefined) {
+        fileInfo = ''
+      }
+      return fileInfo
     } else if (field.attr('type') == 'number') {
       let numericValue = parseInt(field.val(), 10)
       return isNaN(numericValue) ? '' : numericValue
