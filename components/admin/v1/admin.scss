@@ -342,6 +342,30 @@
     }
   }
 
+  /* Relevanssi */
+  #relevanssi_hidebox {
+    p {
+      + p {
+        margin-top: 0;
+        margin-bottom: 4px;
+
+        + p {
+          display: none;
+        }
+      }
+    }
+
+    textarea + p {
+      margin-top: 2px;
+    }
+
+    input[type='checkbox'] {
+      margin-right: 2px;
+      position: relative;
+      top: -1px;
+    }
+  }
+
   /* Taxonomies */
   form#addtag {
     margin-top: 22px;
