@@ -37,14 +37,14 @@
   }
 }
 
-@mixin responsive($property, $desktop-size, $mobile-size, $tablet-size : null) {
+@mixin responsive($property, $desktop-size, $mobile-size, $medium-size : null) {
   @include media-breakpoint-down(sm) {
     #{$property}: $mobile-size;
   }
 
-  @if ($tablet-size) {
+  @if ($medium-size) {
     @include media-breakpoint-between(sm, md) {
-      #{$property}: $tablet-size;
+      #{$property}: $medium-size;
     }
   }
 
@@ -53,14 +53,24 @@
   }
 }
 
-@mixin responsive-text($desktop-size : $font-size-lg, $mobile-size : $font-size-sm) {
+@mixin responsive-text($desktop-size : $font-size-lg, $mobile-size : $font-size-sm, $medium-size : null) {
   font-size: rem($desktop-size);
 
   body & {
     font-size: rem($mobile-size);
 
-    @include media-breakpoint-up(md) {
-      font-size: rem($desktop-size);
+    @if ($medium-size) {
+      @include media-breakpoint-up(md) {
+        font-size: rem($medium-size);
+      }
+
+      @include media-breakpoint-up(lg) {
+        font-size: rem($desktop-size);
+      }
+    } @else {
+      @include media-breakpoint-up(md) {
+        font-size: rem($desktop-size);
+      }
     }
   }
 }
