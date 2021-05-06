@@ -1,0 +1,89 @@
+body.styleguide {
+  header,
+  footer,
+  .breadcrumb {
+    display: none;
+  }
+
+  .styleguide-content {
+    display: block;
+    background: $white;
+    max-width: rem(1024);
+    margin: auto;
+    padding: rem(40) rem(16) rem(100);
+    padding-bottom: rem(100);
+
+    p + p {
+      margin-top: .5em;
+    }
+
+    .row + .row {
+      margin-top: rem(50);
+    }
+  }
+
+  nav {
+    padding-top: 1em;
+  }
+
+  textarea {
+    font-family: monospace;
+    font-size: rem(13);
+    padding: 1em;
+    width: 100%;
+    min-height: rem(500);
+    border: 1px solid $gray-500;
+    color: $gray-600;
+  }
+
+  code {
+    display: inline-block;
+    font-family: monospace;
+    font-size: rem(12);
+    color: $gray-500;
+    border-top: 1px dashed $gray-500;
+    user-select: none;
+    margin: .5rem 0 1rem;
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+
+    span {
+      background: $gray-500;
+      color: $white;
+      display: inline-block;
+      position: relative;
+      top: -1px;
+      height: 1.5em;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      padding: 0 3px;
+      margin-right: 6px;
+    }
+  }
+
+  .badge {
+    @include antialias;
+    font-family: monospace;
+    font-size: rem(14);
+    width: 100%;
+    line-height: rem(22);
+    margin-bottom: rem(4);
+
+    &.badge-white {
+      border: 1px solid $gray-300;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .copyright {
+    padding: 2rem;
+    text-align: center;
+    font-size: rem(13);
+    color: $gray-800;
+  }
+}
