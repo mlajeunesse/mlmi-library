@@ -20,16 +20,13 @@ export default function (options) {
   }, options)
 
   /* jQuery object */
-  $.fn.MLMI_ViewportHeight = function(options)
-  {
+  $.fn.MLMI_ViewportHeight = function(options) {
     let self = this
 
     self.check_timer = undefined
     self.is_height_set = false
 
-    self.check = function()
-    {
-      // bail if prevented by mobile or desktop rules
+    self.check = function() {
       if ((obj.mobileChecker.isMobile === true && obj.options.mobile === false) || (obj.mobileChecker.isMobile === false && obj.options.desktop === false)) {
         self.css({
           'min-height': '',
@@ -78,8 +75,7 @@ export default function (options) {
       self.trigger('viewport_fixed', [selfHeight, windowHeight, innerHeight, targetHeight])
     }
 
-    return function()
-    {
+    return function() {
       if (options.updateDynamically) {
         $(window).on('load orientationchange resize', function() {
           clearTimeout(self.check_timer)
