@@ -26,9 +26,6 @@ $.fn.FixedContent = function(options) {
 
       /* Offset for top element */
       let topOffset = $(window).scrollTop()
-      console.log('window: '+topOffset);
-      console.log('containertop: '+targetTop);
-      console.log('topblockerheight: '+self.options.topBlocker.outerHeight(false));
       if (topOffset < 0) {
         topOffset = 0
       }
