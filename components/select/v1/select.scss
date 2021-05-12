@@ -4,12 +4,14 @@
 
 $select-border-width: 1px !default;
 $select-border: $input-border !default;
+$select-border-radius: $input-border-radius !default;
 $select-border-focus: $input-border-focus !default;
 $select-border-active: $input-border-active !default;
 $select-padding: $input-padding !default;
 $select-background: $input-background !default;
 $select-background-focus: $input-background-focus !default;
 $select-background-active: $input-background-active !default;
+$select-color: inherit !default;
 
 $select-options-max-height: rem(160) !default;
 $select-options-border-width: 1px !default;
@@ -17,6 +19,8 @@ $select-options-border: $select-border !default;
 $select-options-background: $select-background !default;
 $select-options-background-focus: $select-options-background !default;
 $select-options-background-active: $select-options-background !default;
+$select-options-color-focus: inherit !default;
+$select-options-color-active: inherit !default;
 $select-options-padding: $select-padding !default;
 
 @mixin select {
@@ -25,7 +29,7 @@ $select-options-padding: $select-padding !default;
   display: block;
   position: relative;
   user-select: none;
-  color: inherit;
+  color: $select-color;
 
   select {
     display: none !important;
@@ -39,6 +43,8 @@ $select-options-padding: $select-padding !default;
     border: $select-border;
     padding: $select-padding;
     background-color: $select-background;
+    border-radius: $select-border-radius;
+    color: $select-color;
 
     &::after {
       content: '▾';
@@ -89,16 +95,19 @@ $select-options-padding: $select-padding !default;
 
       li {
         padding: $select-options-padding;
+        color: $select-color;
         cursor: pointer;
 
         &:focus,
         &:hover {
           background-color: $select-options-background-focus;
+          color: $select-options-color-focus;
           outline: 0;
         }
 
         &:active {
           background-color: $select-options-background-active;
+          color: $select-options-color-active;
           outline: 0;
         }
 
@@ -148,6 +157,7 @@ $select-options-padding: $select-padding !default;
     border: $select-border;
     padding: $select-padding;
     background-color: $select-background;
+    color: $select-color;
 
     &:focus {
       border: $select-border-focus;
@@ -173,10 +183,12 @@ $select-options-padding: $select-padding !default;
         &:focus,
         &:hover {
           background-color: $select-options-background-focus;
+          color: $select-options-color-focus;
         }
 
         &:active {
           background-color: $select-options-background-active;
+          color: $select-options-color-active;
         }
       }
     }

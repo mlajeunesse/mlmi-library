@@ -6,6 +6,7 @@ $datepicker-background-focus: $datepicker-background !default;
 $datepicker-arrow-width: rem(32) !default;
 $datepicker-arrow-height: $datepicker-arrow-width !default;
 $datepicker-calendar-margin-top: 0 !default;
+$datepicker-color: inherit !default;
 
 .ui-datepicker {
   border: $datepicker-border;
@@ -16,6 +17,7 @@ $datepicker-calendar-margin-top: 0 !default;
   width: 100%;
   max-width: rem(300);
   display: none;
+  color: $datepicker-color;
 
   &-title {
     text-align: center;

@@ -17,6 +17,7 @@ $input-background : $white !default;
 $input-background-focus : $input-background !default;
 $input-background-active : $input-background !default;
 $input-padding : rem(8) !default;
+$input-color: inherit !default;
 
 $submit-border-width : 1px;
 $submit-border : $submit-border-width solid $input-border-color !default;
@@ -85,7 +86,7 @@ $radio-dot-background : $input-border-color !default;
   border-radius: $input-border-radius;
   padding: $input-padding;
   background-color: $input-background;
-  color: inherit;
+  color: $input-color;
 
   &:focus {
     border: $input-border-focus;
@@ -99,7 +100,7 @@ $radio-dot-background : $input-border-color !default;
 
   &:disabled {
     pointer-events: none;
-    color: inherit;
+    color: $input-color;
     opacity: .75;
   }
 }
@@ -186,6 +187,24 @@ $radio-dot-background : $input-border-color !default;
   }
 }
 
+@mixin form-radio {
+  @include form-checkbox;
+
+  + span {
+    border-radius: 50%;
+  }
+
+  &:checked + span {
+    &::after {
+      display: block;
+      width: $radio-dot-width;
+      height: $radio-dot-height;
+      background: $radio-dot-background;
+      border-radius: 50%;
+    }
+  }
+}
+
 @mixin floating-label {
   user-select: none;
   pointer-events: none;
@@ -206,10 +225,6 @@ $radio-dot-background : $input-border-color !default;
   color: inherit;
   flex-direction: column;
 
-  // @if $use-floating-labels == false {
-  //   flex-direction: column;
-  // }
-
   &__input:not([type='checkbox']):not([type='radio']):not([type='file']) {
     @include form-input();
   }
@@ -217,9 +232,6 @@ $radio-dot-background : $input-border-color !default;
   &__input:not([type='checkbox']):not([type='radio']),
   .select {
     order: 2;
-    // @if $use-floating-labels == false {
-    //   order: 2;
-    // }
   }
 
   &__label {
@@ -268,8 +280,7 @@ $radio-dot-background : $input-border-color !default;
   }
 
   &--type-true_false,
-  &--type-checkbox,
-  &--type-radio {
+  &--type-checkbox {
     cursor: pointer;
     flex-direction: row;
     align-items: center;
@@ -282,21 +293,13 @@ $radio-dot-background : $input-border-color !default;
   }
 
   &--type-radio {
+    cursor: pointer;
+    flex-direction: row;
+    align-items: center;
+
     .field {
       &__input {
-        + span {
-          border-radius: 50%;
-        }
-
-        &:checked + span {
-          &::after {
-            display: block;
-            width: $radio-dot-width;
-            height: $radio-dot-height;
-            background: $radio-dot-background;
-            border-radius: 50%;
-          }
-        }
+        @include form-radio;
       }
     }
   }
