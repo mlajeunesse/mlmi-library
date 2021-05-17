@@ -90,18 +90,18 @@ $datepicker-color: inherit !default;
           display: block;
 
           &:hover {
-            background: $input-background-focus;
+            background: $datepicker-background-focus;
             text-decoration: none;
           }
 
           &:focus {
-            background: $input-background-focus;
+            background: $datepicker-background-focus;
             outline: 0;
           }
 
           &:active,
           &.ui-state-active {
-            background: $input-background-active;
+            background: $datepicker-background-active;
           }
         }
 

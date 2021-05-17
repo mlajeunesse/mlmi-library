@@ -34,6 +34,7 @@ $checkbox-width : rem(16) !default;
 $checkbox-margin : rem(6) !default;
 $checkbox-margin-left: rem(16) !default;
 $checkbox-border : $input-border !default;
+$checkbox-border-radius : 0 !default;
 $checkbox-background : $input-background !default;
 $checkbox-selected-background : $input-background-active !default;
 $checkbox-selected-border: $checkbox-border !default;
@@ -130,13 +131,14 @@ $radio-dot-background : $input-border-color !default;
   width: $checkbox-width;
   height: $checkbox-width;
   pointer-events: none;
+  visibility: hidden;
 
   + span {
     position: relative;
     display: inline-block;
-    border: $input-border;
-    border-radius: $input-border-radius;
-    background: $input-background;
+    border: $checkbox-border;
+    border-radius: $checkbox-border-radius;
+    background: $checkbox-background;
     width: $checkbox-width;
     height: $checkbox-width;
     margin-right: $checkbox-margin;
