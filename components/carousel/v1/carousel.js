@@ -144,6 +144,7 @@ export function Carousel_CoreInit() {
     let self = $(this)
     let coreOptions = self.data('carousel'),
     heightOptions = self.data('height'),
+    slidesPerView = self.data('columns'),
     swiperOptions = {
       direction: 'horizontal',
       loop: $.inArray('loop', coreOptions) !== -1 ? true : false,
@@ -158,7 +159,7 @@ export function Carousel_CoreInit() {
           slidesPerView: 1,
         },
         768: {
-          slidesPerView: self.data('columns'),
+          slidesPerView: slidesPerView,
         }
       }
     }
@@ -190,6 +191,10 @@ export function Carousel_CoreInit() {
     } else if (heightOptions == 'auto-height-md') {
       swiperOptions.breakpoints[0].autoHeight = false
       swiperOptions.breakpoints[768].autoHeight = true
+    }
+    if ($.inArray('group_slides', coreOptions) !== -1) {
+      swiperOptions.slidesPerGroup = slidesPerView
+      swiperOptions.loopFillGroupWithBlank = true
     }
     let carouselOptions = {
       mobile: self.data('carousel-sm') ? true : false,
