@@ -193,14 +193,15 @@ export function Carousel_CoreInit() {
       swiperOptions.breakpoints[768].autoHeight = true
     }
     if ($.inArray('group_slides', coreOptions) !== -1) {
-      swiperOptions.slidesPerGroup = slidesPerView
-      swiperOptions.loopFillGroupWithBlank = true
+      swiperOptions.breakpoints[768].slidesPerGroup = slidesPerView
+      swiperOptions.breakpoints[768].loopFillGroupWithBlank = true
     }
     let carouselOptions = {
       mobile: self.data('carousel-sm') ? true : false,
       desktop: self.data('carousel-md') ? true : false,
       wrapperClass: 'carousel__wrapper',
       slideClass: 'carousel__slide',
+      forceRebuild: true,
     }
     let carousel = new Carousel(self.get(0), swiperOptions, carouselOptions)
     carousel.init()
