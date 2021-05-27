@@ -75,6 +75,19 @@
   }
 }
 
+@mixin picture-ratio($ratio) {
+  padding-top: $ratio * 100%;
+
+  img {
+    height: 100%;
+    left: 50%;
+    object-fit: cover;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+}
+
 /*
 *  Resets
 */
