@@ -75,6 +75,18 @@
   }
 }
 
+@mixin gutters($new-gutter-width: $grid-gutter-width) {
+  .row {
+    margin-left: -$new-gutter-width / 2;
+    margin-right: -$new-gutter-width / 2;
+
+    .col {
+      padding-left: $new-gutter-width / 2;
+      padding-right: $new-gutter-width / 2;
+    }
+  }
+}
+
 @mixin picture-ratio($ratio) {
   padding-top: $ratio * 100%;
 
