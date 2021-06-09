@@ -3,6 +3,9 @@
 */
 $.fn.BlockElement = function(mainClass) {
 	let self = this
+  if (self.data('BlockElement')) {
+    return self.data('BlockElement')
+  }
 	self.mainClass = mainClass
 
 	/* Add child element */
@@ -40,6 +43,7 @@ $.fn.BlockElement = function(mainClass) {
 			self.mainClass = self.attr('class').split(' ')[0]
 		}
 		self.addClass(self.mainClass)
+    self.data('BlockElement', self)
 		return self
 	}()
 }
