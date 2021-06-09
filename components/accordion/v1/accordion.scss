@@ -16,7 +16,7 @@ $accordion-default-max-height: 200px !default;
     max-height: $accordion-default-max-height;
     visibility: visible;
 
-    &[aria-hidden=true] {
+    &[aria-hidden='true'] {
       display: block;
       max-height: 0 !important; // scss-lint:disable ImportantRule
       opacity: 0;
