@@ -158,6 +158,12 @@ $.fn.Form = function(obj) {
     if (obj.options.use_ajax) {
       self.on('submit', self.handle_submit)
     }
+    if (obj.options.repeater_field) {
+      /* Called first to detach template */
+      self.find('.repeater-container').each(function() {
+        $(this).RepeaterField(obj)
+      })
+    }
     if (obj.options.floating_labels === true) {
       self.find('.field').each(function() {
         $(this).FloatingLabel()
@@ -179,7 +185,7 @@ $.fn.Form = function(obj) {
         prevText: '◀',
       }, obj.options.date_picker)
       DatePickerFactory($)
-      $('.field--type-date_picker input').each(function() {
+      self.find('.field--type-date_picker input').each(function() {
         $(this).datepicker(obj.options.date_picker)
         if (obj.options.locale == 'fr') {
           DatePickerFactoryFR($)
@@ -216,6 +222,7 @@ export default function (selector, options) {
     blocked_class: false,
     floating_labels: false,
     select_element: true,
+    repeater_field: false,
     date_picker: false,
     onSubmit: undefined,
     onSuccess: undefined,
