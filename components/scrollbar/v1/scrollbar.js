@@ -64,8 +64,7 @@ export default function (selector, options)
 		}
 		_bar.active_timeout = undefined
 
-		_bar.dragging = function()
-		{
+		_bar.dragging = function() {
       if (_bar.options.direction == 'vertical') {
 				let targetPercentage = parseFloat(_bar.el.thumb.css('top')) / _bar.getScrollableSize()
 				if (targetPercentage < 0) targetPercentage = 0
@@ -79,20 +78,17 @@ export default function (selector, options)
 			}
 		}
 
-		_bar.start = function()
-		{
+		_bar.start = function() {
 			_bar.status.dragging = true
 			_bar.addModifier('active').addModifier('dragging')
 		}
 
-		_bar.stop = function()
-		{
+		_bar.stop = function() {
 			_bar.status.dragging = false
 			_bar.removeModifier('active').removeModifier('dragging')
 		}
 
-		_bar.getScrollableSize = function()
-		{
+		_bar.getScrollableSize = function() {
       let scrollableSize = 0
       if (_bar.options.direction == 'vertical') {
         scrollableSize = _bar.height() - _bar.el.thumb.height()
@@ -102,8 +98,7 @@ export default function (selector, options)
 			return scrollableSize
 		}
 
-		_bar.setScrollPercentage = function(_percentage)
-		{
+		_bar.setScrollPercentage = function(_percentage) {
       if (_bar.options.direction == 'vertical') {
         _bar.el.thumb.css({
   				top: Math.ceil(_percentage * _bar.getScrollableSize())
@@ -124,8 +119,7 @@ export default function (selector, options)
 			}, 500)
 		}
 
-		_bar.setVisiblePercentage = function(_percentage)
-		{
+		_bar.setVisiblePercentage = function(_percentage) {
       if (_bar.options.direction == 'vertical') {
         _bar.el.thumb.css({
   				height: (_percentage * 100) + '%'
@@ -141,8 +135,7 @@ export default function (selector, options)
       _bar.remove()
     }
 
-		return function()
-		{
+		return function() {
 			// default options
 			if (_bar.options == undefined) _bar.options = {}
 			if (!_bar.options.hasOwnProperty('direction')) _bar.options.direction = 'vertical'
