@@ -11,7 +11,7 @@ $.fn.FloatingLabel = function() {
   self.is_empty = self.field.val() == ''
 
   self.check = function() {
-    if (self.field.val()) {
+    if (self.field.val() && self.field.val() != 'none') {
       self.removeClass('field--empty').addClass('field--populated')
       self.is_empty = false
     } else {

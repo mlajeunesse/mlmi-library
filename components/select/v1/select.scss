@@ -14,7 +14,7 @@ $select-background-active: $input-background-active !default;
 $select-color: inherit !default;
 
 $select-options-max-height: rem(160) !default;
-$select-options-border-width: 1px !default;
+$select-options-border-width: $select-border-width !default;
 $select-options-border: $select-border !default;
 $select-options-background: $select-background !default;
 $select-options-background-focus: $select-options-background !default;

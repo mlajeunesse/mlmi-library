@@ -26,9 +26,11 @@ $submit-border-focus : $submit-border !default;
 $submit-border-active : $submit-border !default;
 $submit-background : $input-background !default;
 $submit-background-hover : $submit-background !default;
-$submit-background-focus : $input-background-focus !default;
-$submit-background-active : $input-background-active !default;
+$submit-background-focus : $submit-background !default;
+$submit-background-active : $submit-background !default;
 $submit-padding : rem(8) !default;
+$submit-color: inherit !default;
+$submit-color-disabled: $submit-color !default;
 
 $checkbox-width : rem(16) !default;
 $checkbox-margin : rem(6) !default;
@@ -257,7 +259,7 @@ $radio-dot-background : $input-border-color !default;
     border: $submit-border;
     background: $submit-background;
     padding: $submit-padding;
-    color: inherit;
+    color: $submit-color;
 
     &:hover {
       border: $submit-border-hover;
@@ -276,7 +278,7 @@ $radio-dot-background : $input-border-color !default;
 
     &:disabled {
       pointer-events: none;
-      color: inherit;
+      color: $submit-color-disabled;
       opacity: .75;
     }
   }
