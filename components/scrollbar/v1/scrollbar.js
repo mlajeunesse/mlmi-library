@@ -338,19 +338,23 @@ export default function (selector, options)
   obj.init = function() {
     obj.mobileChecker.addCallbacks(function() {
       if (obj.options.mobile) {
-        $(selector).each(function() {
-          let scroller = $(this).MLMI_Scroller(obj.options).addScrollbar(obj.options)
-      		obj.scrollers.push(scroller)
-      	})
+        if (!obj.scrollers.length) {
+          $(selector).each(function() {
+            let scroller = $(this).MLMI_Scroller(obj.options).addScrollbar(obj.options)
+        		obj.scrollers.push(scroller)
+        	})
+        }
       } else {
         obj.kill()
       }
     }, function() {
       if (obj.options.desktop) {
-        $(selector).each(function() {
-          let scroller = $(this).MLMI_Scroller(obj.options).addScrollbar(obj.options)
-      		obj.scrollers.push(scroller)
-      	})
+        if (!obj.scrollers.length) {
+          $(selector).each(function() {
+            let scroller = $(this).MLMI_Scroller(obj.options).addScrollbar(obj.options)
+        		obj.scrollers.push(scroller)
+        	})
+        }
       } else {
         obj.kill()
       }
