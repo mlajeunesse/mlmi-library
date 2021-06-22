@@ -24,6 +24,14 @@
   -webkit-overflow-scrolling: touch;
 }
 
+@mixin hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @mixin container($max-width: 100%) {
   max-width: $max-width;
   padding-left: rem($container-padding);
