@@ -239,7 +239,10 @@ export default function (options) {
               if (['pdf', 'jpg', 'gif', 'png', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'txt', 'xml'].indexOf(ext) !== -1) { return true }
             }
             if (obj.options.on.linkClicked != undefined) {
-              obj.options.on.linkClicked($(this))
+              let linkClicked = obj.options.on.linkClicked($(this))
+              if (linkClicked === -1) {
+                return true
+              }
             }
             obj.getPage(link)
             return false
