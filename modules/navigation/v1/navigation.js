@@ -225,7 +225,7 @@ export default function (options) {
           if ($(this).attr('target') === '_blank') {
             return true
           }
-          if ($(this).data('preventTransition') === 1) {
+          if ($(this).data('preventTransition') === 1 || $(this).data('prevent-transition') === 1) {
             return true
           }
           if (e.originalEvent != undefined && (e.originalEvent.cmdKey || e.originalEvent.metaKey)) { return true }
