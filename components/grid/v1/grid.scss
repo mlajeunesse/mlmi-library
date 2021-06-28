@@ -1,8 +1,9 @@
 $grid-component-column-gap: rem($grid-gutter-size) !default;
 $grid-component-row-gap-md: $grid-component-column-gap !default;
 $grid-component-row-gap-sm: $grid-component-row-gap-md !default;
+$grid-auto-initialize: true !default;
 
-.grid {
+@mixin grid {
   @include responsive('grid-row-gap', $grid-component-row-gap-md, $grid-component-row-gap-sm);
   display: grid;
   grid-template-columns: 1fr;
@@ -24,6 +25,12 @@ $grid-component-row-gap-sm: $grid-component-row-gap-md !default;
 
   @media screen and (max-width: 500px) {
     grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
+
+.grid {
+  @if $grid-auto-initialize {
+    @include grid;
   }
 }
 
