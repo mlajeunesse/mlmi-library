@@ -1,3 +1,8 @@
+import '../../select/v1/select'
+import '../../floating-label/v1/floating-label'
+import DatePickerFactory from 'jquery-datepicker'
+import DatePickerFactoryFR from 'jquery-datepicker/i18n/jquery.ui.datepicker-fr'
+
 $.fn.RepeaterField = function(obj) {
   let self = this
   self.el = {
