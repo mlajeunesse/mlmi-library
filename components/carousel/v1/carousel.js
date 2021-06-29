@@ -176,6 +176,13 @@ export function Carousel_CoreInit() {
         nextEl: self.find('.carousel__toolbar .swiper-button-next').get(0),
       }
     }
+    if ($.inArray('use_fraction', coreOptions) !== -1) {
+      swiperOptions.pagination = {
+        el: self.find('.carousel__toolbar .swiper-pagination').get(0),
+        type: 'fraction',
+        clickable: true,
+      }
+    }
     if ($.inArray('use_scrollbar', coreOptions) !== -1) {
       swiperOptions.loop = false
       swiperOptions.scrollbar = {
