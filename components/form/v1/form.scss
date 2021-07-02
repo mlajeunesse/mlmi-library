@@ -30,6 +30,9 @@ $submit-background-focus : $submit-background !default;
 $submit-background-active : $submit-background !default;
 $submit-padding : rem(8) !default;
 $submit-color: inherit !default;
+$submit-color-hover: $submit-color !default;
+$submit-color-focus: $submit-color !default;
+$submit-color-active: $submit-color !default;
 $submit-color-disabled: $submit-color !default;
 
 $checkbox-width : rem(16) !default;
@@ -264,16 +267,19 @@ $radio-dot-background : $input-border-color !default;
     &:hover {
       border: $submit-border-hover;
       background: $submit-background-hover;
+      color: $submit-color-hover;
     }
 
     &:focus {
       border: $submit-border-focus;
       background: $submit-background-focus;
+      color: $submit-color-focus;
     }
 
     &:active {
       border: $submit-border-active;
       background: $submit-background-active;
+      color: $submit-color-active;
     }
 
     &:disabled {
