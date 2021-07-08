@@ -31,7 +31,7 @@ $.fn.FixedContent = function(options) {
       }
       targetTop -= topOffset
 
-      if(self.options.topBlocker != null){
+      if (self.options.topBlocker != null) {
         var topBlockerHeight = self.options.topBlocker.outerHeight(false);
       }else{
         var topBlockerHeight = 0;
@@ -73,12 +73,14 @@ $.fn.FixedContent = function(options) {
 
   return function() {
     $.mlmi.mobile.addCallbacks(function() {
-      self.scrollEvents.add(self.calculatePosition)
-      self.calculatePosition()
-    }, function() {
-      if(self.options.mobile){
+      if (self.options.mobile) {
         self.scrollEvents.add(self.calculatePosition)
+        self.calculatePosition()
+      } else {
+        self.destroy()
       }
+    }, function() {
+      self.scrollEvents.add(self.calculatePosition)
       self.calculatePosition()
     })
     self.data('fixedContent', self)
