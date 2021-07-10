@@ -1,5 +1,5 @@
-import { TRANSITION_END, IS_IOS, IS_ANDROID } from '../../../utils/animation'
-import '../../../plugins/scroll-to'
+import { TRANSITION_END, IS_ANDROID, IS_IOS } from '../utils'
+import '../plugins/scroll-to'
 
 $.fn.Tab = function(tabset) {
   let tab = this
@@ -9,7 +9,7 @@ $.fn.Tab = function(tabset) {
   tab.name = tab.attr('id').replace('tab-', '')
   tab.panel = tabset.find('.tabs__panel#panel-' + tab.name)
 
-  tab.clicked = function() {
+  tab.clicked = function(e) {
     tabset.select(tab)
   }
 
@@ -23,6 +23,9 @@ $.fn.Tab = function(tabset) {
 
 $.fn.TabSet = function() {
   let tabset = this
+  if (tabset.data('tabset')) {
+    return tabset.data('tabset')
+  }
   tabset.tabs = []
   tabset.current = undefined
   tabset.wrapper = tabset.find('.tabs__panels-list')
@@ -60,6 +63,7 @@ $.fn.TabSet = function() {
 
       /* Display new current tab */
       _tab.attr('aria-selected', 'true')
+      tabset.trigger('tab_changed', [tabset.current])
       tabset.current = _tab
       tabset.timeout = setTimeout(function() {
         tabset.current.panel.hide().prop('hidden', false).stop(true).fadeIn(450, 'swing', function() {
@@ -111,6 +115,7 @@ $.fn.TabSet = function() {
     } else {
       $(window).on('resize orientationchange', tabset.stopAnimations)
     }
+    tabset.data('tabset', tabset)
     return tabset
   }()
 }
