@@ -10,9 +10,10 @@ $.fn.Form = function(obj) {
   }
   self.action = self.find('input[name="action"]').val()
   self.fields = {}
+  self.repeaters = {}
   self.el = {
-    inputs: self.find(':input'),
-    fields: self.find('.field'),
+    inputs: self.find(':input:not(.repeater-container :input)'),
+    fields: self.find('.field:not(.repeater-container .field)'),
     submit: self.find('[type="submit"]'),
   }
 
@@ -28,6 +29,10 @@ $.fn.Form = function(obj) {
       } else {
         data.append(fieldName, formValue)
       }
+    }
+    for (let fieldName in self.repeaters) {
+      let repeaterField = self.repeaters[fieldName]
+      data.append(fieldName, JSON.stringify(repeaterField.get_repeater_value()))
     }
     return data
   }
@@ -155,14 +160,15 @@ $.fn.Form = function(obj) {
         self.fields[$(this).attr('name')] = $(this)
       }
     })
+    /* Called first to detach template */
+    if (obj.options.repeater_field) {
+      self.find('.repeater-container').each(function() {
+        let repeater = $(this).RepeaterField(obj)
+        self.repeaters[repeater.name] = repeater
+      })
+    }
     if (obj.options.use_ajax) {
       self.on('submit', self.handle_submit)
-    }
-    if (obj.options.repeater_field) {
-      /* Called first to detach template */
-      self.find('.repeater-container').each(function() {
-        $(this).RepeaterField(obj)
-      })
     }
     if (obj.options.floating_labels === true) {
       self.find('.field').each(function() {

@@ -346,3 +346,8 @@ $radio-dot-background : $input-border-color !default;
     display: none;
   }
 }
+
+/* Default state */
+.repeater-container__remove-btn {
+  display: none;
+}
