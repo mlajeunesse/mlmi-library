@@ -49,10 +49,11 @@ $checkbox-focus-selected-background: $input-background-active !default;
 $checkbox-focus-selected-border: $checkbox-focus-border !default;
 
 $radio-width : rem(16) !default;
+$radio-height : $radio-width !default;
 $radio-margin : rem(6) !default;
 $radio-border : $input-border !default;
 $radio-dot-width : rem(8) !default;
-$radio-dot-height : rem(8) !default;
+$radio-dot-height : $radio-dot-width !default;
 $radio-dot-background : $input-border-color !default;
 
 @mixin input-reset() {
@@ -198,6 +199,8 @@ $radio-dot-background : $input-border-color !default;
   @include form-checkbox;
 
   + span {
+    width: $radio-width;
+    height: $radio-height;
     border-radius: 50%;
   }
 
